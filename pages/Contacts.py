@@ -7,8 +7,15 @@ Created on Sat Nov  5 09:28:45 2022
 
 import streamlit as st
 import re
+from pathlib import Path, PurePath
+import sys
+sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
+import __add_background_from_local__ as add_bg
+import __send_message_to_email__ as send_email
 
-TSO_EMAIL = 'thesocialoutfits@gmail.com'
+
+TSO_EMAIL = 'thesocialoutfits@gmail.com'  # Uncomment this line when live
+# TSO_EMAIL = 'dludwins@outlook.com'
 
 
 def get_contact_info(name: str,
@@ -62,8 +69,18 @@ def _check_message_is_ascii(message='') -> str:
         return ''
 
 
+def _concat_all_dict_values(dictionary: dict):
+    all_vals = [str(val) for val in dictionary.values()]
+    return '\n\n'.join(all_vals)
+
+
 def contacts_page_main():
     global TSO_EMAIL
+    logo_path = Path(
+        PurePath(__file__).parents[1],
+        PurePath('.data/images/Logo')
+    )
+    add_bg.add_bg_from_local(str(Path(logo_path, 'Social Outfit Logo.png')))
     st.header('Contact Us')
     st.subheader(f'Send us an email directly: {TSO_EMAIL}')
     st.write('Message us today to get the help you have been looking for')
@@ -82,7 +99,12 @@ def contacts_page_main():
                                     )
     if message_info:
         if st.button('Submit'):
-            st.write(message_info)
+            send_email.capture_and_send_email(
+                dest=TSO_EMAIL,
+                subject=email,
+                body=_concat_all_dict_values(message_info),
+                )
+            st.write('MessageSent!')
 
 
 if __name__ == '__main__':

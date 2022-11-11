@@ -6,6 +6,12 @@ Created on Sat Nov  5 09:30:24 2022
 """
 
 import streamlit as st
+from pathlib import Path, PurePath
+import sys
+sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
+import __add_background_from_local__ as add_bg
+
+
 
 
 def _get_portofolio_contents(file_type: str) -> dict:
@@ -64,6 +70,11 @@ def _assign_data_to_tab(tab_name, _title, _func):
 
 
 def portfolio_page_main():
+    logo_path = Path(
+        PurePath(__file__).parents[1],
+        PurePath('.data/images/Logo')
+    )
+    add_bg.add_bg_from_local(str(Path(logo_path, 'Social Outfit Logo.png')))
     st.header('Portfolio')
     st.subheader('Recent Projects:')
     for _file in _display_newest_files():
