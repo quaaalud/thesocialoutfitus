@@ -10,6 +10,7 @@ import re
 from pathlib import Path, PurePath
 import sys
 sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
+sys.path.append(str(Path(PurePath(__file__).parents[1], '.data')))
 import __add_background_from_local__ as add_bg
 import __send_message_to_email__ as send_email
 
@@ -80,31 +81,57 @@ def contacts_page_main():
         PurePath(__file__).parents[1],
         PurePath('.data/images/Logo')
     )
-    add_bg.add_bg_from_local(str(Path(logo_path, 'Social Outfit Logo.png')))
+    # add_bg.add_bg_from_local(str(Path(logo_path,
+    #                                  'Social Outfit Logo.png'))
+    #                         )
     st.header('Contact Us')
     st.subheader(f'Send us an email directly: {TSO_EMAIL}')
-    st.write('Message us today to get the help you have been looking for')
-    name = st.text_input('Your Name:', max_chars=30)
-    email = st.text_input('Email:', max_chars=50)
-    phone = st.text_input('Phone:', max_chars=20)
-    question = st.text_area('How can we help you:',
-                            height=40,
-                            max_chars=500,
-                            )
-
-    message_info = get_contact_info(name,
-                                    email,
-                                    phone=phone,
-                                    message=question
+    st.write('Message us today to get the help you have been looking for!')
+    try:
+        my_expander = st.expander(label='Click Here to Message Us')
+        with my_expander:
+            name = st.text_input('Your Name:', max_chars=30)
+            email = st.text_input('Email:', max_chars=50)
+            phone = st.text_input('Phone:', max_chars=20)
+            question = st.text_area('How can we help you:',
+                                    height=40,
+                                    max_chars=500,
                                     )
-    if message_info:
-        if st.button('Submit'):
-            send_email.capture_and_send_email(
-                dest=TSO_EMAIL,
-                subject=email,
-                body=_concat_all_dict_values(message_info),
-                )
-            st.write('MessageSent!')
+            message_info = get_contact_info(name,
+                                            email,
+                                            phone=phone,
+                                            message=question
+                                            )
+            if message_info:
+                if st.button('Submit'):
+                    send_email.capture_and_send_email(
+                        dest=TSO_EMAIL,
+                        subject=email,
+                        body=_concat_all_dict_values(message_info),
+                        )
+                    st.write('Message Sent!')
+    except:
+        name = st.text_input('Your Name:', max_chars=30)
+        email = st.text_input('Email:', max_chars=50)
+        phone = st.text_input('Phone:', max_chars=20)
+        question = st.text_area('How can we help you:',
+                                height=40,
+                                max_chars=500,
+                                )
+        message_info = get_contact_info(name,
+                                        email,
+                                        phone=phone,
+                                        message=question
+                                        )
+        if message_info:
+            if st.button('Submit'):
+                send_email.capture_and_send_email(
+                    dest=TSO_EMAIL,
+                    subject=email,
+                    body=_concat_all_dict_values(message_info),
+                    )
+                st.write('Message Sent!')
+
 
 
 if __name__ == '__main__':

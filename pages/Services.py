@@ -12,24 +12,55 @@ sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
 import __add_background_from_local__ as add_bg
 
 
-SERVICES = [
-    'Build your Social Media Presence',
-    'Search Engine Optimization',
-    'Logo Creation',
-    'Simple Web App Creation'
-]
+def _return_services_with_display() -> dict:
+    from __get_image_to_display__ import return_image_from_path
+    data_path = Path(
+        PurePath(__file__).parents[1],
+        PurePath('.data')
+    )
+    media_display = Path(data_path,
+                         'images/Logo/Social Outfit Logo.png'
+                         )
+    se_display = Path(data_path,
+                      'images/Logo/Social Outfit Logo All White.png'
+                      )
+    logo_display = Path(data_path,
+                        'images/Logo/Social Outfit Logo.png'
+                        )
+    wa_display = Path(data_path,
+                      'images/Logo/Social Outfit Logo All White.png'
+                      )
+    return {
+        'Build your Social Media Presence': return_image_from_path(
+            media_display
+            ),
+        'Search Engine Optimization': return_image_from_path(
+            se_display
+            ),
+        'Logo Creation': return_image_from_path(
+            logo_display
+            ),
+        'Simple Web App Creation': return_image_from_path(
+            wa_display
+            ),
+    }
 
 
 def services_page_main():
-    global SERVICES
-    logo_path = Path(
-        PurePath(__file__).parents[1],
-        PurePath('.data/images/Logo')
-    )
-    add_bg.add_bg_from_local(str(Path(logo_path, 'Social Outfit Logo.png')))
+    services = _return_services_with_display()
     st.header('Services Offered')
-    for service in SERVICES:
-        st.markdown(service)
+    i = 0
+    for service, view in services.items():
+        if (i % 2) == 0:
+            col1, col2 = st.columns(2)
+            col1.markdown(service)
+            col2.image(view)
+            i += 1
+        else:
+            col1, col2 = st.columns(2)
+            col1.image(view)
+            col2.markdown(service)
+            i += 1
 
 
 if __name__ == '__main__':

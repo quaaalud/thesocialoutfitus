@@ -23,7 +23,7 @@ class __PATHS__:
     def __init__(self):
         self._PAGES_DIR = PurePath(getcwd(), 'pages')
         self._DATA_DIR = PurePath(getcwd(), '.data')
-        self._DB_PATH = PurePath(self._DATA_DIR, 'contacts.db')
+        self._DB_PATH = PurePath(self._DATA_DIR, '.database/contacts.db')
         self.animations = PurePath(self._DATA_DIR, 'animations')
         self.images = PurePath(self._DATA_DIR, 'images')
         self.music = PurePath(self._DATA_DIR, 'music')
@@ -36,10 +36,15 @@ class __PATHS__:
         return {
             ftype: str(dirpath) for ftype, dirpath in
             self._paths_dict().items() if not
-            ftype.startswith('_')
+            ftype.startswith('_') and not
+            ftype.startswith('.')
+
         }
 
 
 if __name__ == '__main__':
     paths = __PATHS__()
-    print(paths.return_portfolio_directories())
+    for k, v in paths.return_portfolio_directories().items():
+        print(k)
+        print(v)
+        print()
