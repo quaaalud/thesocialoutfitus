@@ -14,12 +14,14 @@ IMG_PATH = Path(DATA_PATH, 'images')
 sys.path.append(str(DATA_PATH))
 sys.path.append(str(Path(PurePath(__file__).parent, 'pages')))
 
+FONT = 'Ink Free'
 
 def main():
     st.set_page_config(
         layout="wide",
         page_title='The Social Outfit',
         )
+    global FONT
     import Contacts
     import Portfolio
     import Services
@@ -47,30 +49,22 @@ def main():
             col3.image(return_image_from_path(str(logo_path)))
     st.empty()
     st.markdown(
-        "<h1 style='text-align: center; font-family:Ink Free;'>\
+        "<h1 style='text-align: center; font-family: {FONT};'> \
         Welcome to The Social Outfit</h1>",
         unsafe_allow_html=True
         )
     st.empty()
     st.markdown(
-        "<h2 style='text-align: center; font-family:papyrus;'>\
+        "<h2 style='text-align: center; font-family:papyrus;'> \
         Saving you time so your business can do what it's best at!</h2>",
         unsafe_allow_html=True
         )
     with st.expander('Contact Us Today'):
         Contacts.contacts_page_main()
     with st.expander('Take a look at what we can do for you'):
-        Portfolio.portfolio_page_main()
+        Portfolio._portfolio_page_func()
     with st.expander('See the current services offered'):
         Services.services_page_main()
-
-
-def _return_app_pages() -> list:
-    pages_files = list(Path(PurePath(__file__).parent, 'pages').iterdir())
-    return [
-        str(file.name).strip('.py') for file in pages_files if
-        Path(file).suffix == '.py'
-    ]
 
 
 def _get_db_connection():

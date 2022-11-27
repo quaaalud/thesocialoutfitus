@@ -97,6 +97,13 @@ def contacts_page_main():
     None.
 
     """
+    try:
+        st.set_page_config(
+            layout="wide",
+            page_title='The Social Outfit - Contact Us',
+            )
+    except:
+        pass
     global TSO_EMAIL
     logo_path = Path(
         PurePath(__file__).parents[1],

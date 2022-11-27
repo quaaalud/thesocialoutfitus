@@ -47,6 +47,13 @@ def _return_services_with_display() -> dict:
 
 
 def services_page_main():
+    try:
+        st.set_page_config(
+            layout="wide",
+            page_title='The Social Outfit - Services',
+            )
+    except:
+        pass
     services = _return_services_with_display()
     st.header('Services Offered')
     i = 0

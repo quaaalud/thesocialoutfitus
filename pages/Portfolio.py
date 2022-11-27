@@ -11,6 +11,8 @@ import sys
 sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
 import __add_background_from_local__ as add_bg
 
+FONT = 'Ink Free'
+
 
 def _get_portofolio_contents(file_type: str) -> dict:
     import __pathconstants__ as _paths
@@ -91,6 +93,7 @@ def _assign_videos_to_tab(vdo_tab: st.tabs) -> st.video:
 
 
 def _assign_music_to_tab(msc_tab: st.tabs) -> st.audio:
+    global FONT
     file_types_dict = {
         '.mp3': 'audio/mp3',
         '.ogg': 'audio/ogg',
@@ -100,21 +103,34 @@ def _assign_music_to_tab(msc_tab: st.tabs) -> st.audio:
     for song_name, file_path in all_music.items():
         if str(file_path.suffix) in file_types_dict.keys():
             with msc_tab:
-                st.subheader(str(song_name))
+                st.markdown(
+                    f"\
+    <p style='text-align: left; font-family: {FONT};'>{str(song_name)}</p>",
+                    unsafe_allow_html=True,
+                    )
                 st.audio(
                     str(file_path),
                     file_types_dict.get(str(file_path.suffix))
                     )
 
 
-def portfolio_page_main():
+def _portfolio_page_func():
+    global FONT
     logo_path = Path(
         PurePath(__file__).parents[1],
         PurePath('.data/images/Logo')
     )
-    #add_bg.add_bg_from_local(str(Path(logo_path, 'Social Outfit Logo.png')))
-    st.header('Portfolio')
-    st.subheader('Recent Projects:')
+#    add_bg.add_bg_from_local(str(Path(logo_path, 'Social Outfit Logo.png')))
+    st.markdown(
+        f"<h1 style='text-align: center; font-family: {FONT};'>\
+        Portfolio</h1>",
+        unsafe_allow_html=True
+        )
+    st.markdown(
+        f"<h2 style='text-align: left; font-family: {FONT};'>\
+        Recent Projects</h1>",
+        unsafe_allow_html=True
+        )
     for _file in _display_newest_files():
         st.write(_file)
     ani_tab, img_tab, msc_tab, vdo_tab = st.tabs([
@@ -124,6 +140,17 @@ def portfolio_page_main():
     _assign_data_to_tab(img_tab, 'Images', _return_images)
     _assign_music_to_tab(msc_tab)
     _assign_videos_to_tab(vdo_tab)
+
+
+def portfolio_page_main():
+    st.set_page_config(
+        layout="wide",
+        page_title='The Social Outfit - Portfolio',
+        )
+    _portfolio_page_func()
+
+
+
 
 
 if __name__ == '__main__':
