@@ -75,7 +75,28 @@ def _concat_all_dict_values(dictionary: dict):
     return '\n\n'.join(all_vals)
 
 
+def _display_current_team_members():
+    team_dir = Path(
+        PurePath(__file__).parents[1],
+        '.data',
+        '.database',
+        '.team'
+    )
+
+
 def contacts_page_main():
+    """
+
+    Streamlit GUI with Contact Form and Current Team Member information.
+
+    Messages are sent to thesocialoutfitus@gmail.com and all email addresses
+    are captured and added to the contacts.db file for later use
+
+    Returns
+    -------
+    None.
+
+    """
     global TSO_EMAIL
     logo_path = Path(
         PurePath(__file__).parents[1],
@@ -131,7 +152,6 @@ def contacts_page_main():
                     body=_concat_all_dict_values(message_info),
                     )
                 st.write('Message Sent!')
-
 
 
 if __name__ == '__main__':
