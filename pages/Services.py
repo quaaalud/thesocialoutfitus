@@ -59,7 +59,11 @@ def services_page_main():
     except:
         pass
     services = _return_services_with_display()
-    st.header('Services Offered')
+    st.markdown(
+        f"<h1 style='text-align: center; font-family: {FONT};'> \
+        <font size='+7'>Services</font><h2>",
+        unsafe_allow_html=True,
+        )
     i = 0
     for service, view in services.items():
         if (i % 2) == 0:
