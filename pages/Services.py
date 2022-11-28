@@ -11,6 +11,9 @@ import sys
 sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
 import __add_background_from_local__ as add_bg
 
+FONT = 'Ink Free'
+FONT1 = 'Papyrus'
+
 
 def _return_services_with_display() -> dict:
     from __get_image_to_display__ import return_image_from_path
@@ -47,6 +50,7 @@ def _return_services_with_display() -> dict:
 
 
 def services_page_main():
+    global FONT, FONT1
     try:
         st.set_page_config(
             layout="wide",
@@ -60,13 +64,21 @@ def services_page_main():
     for service, view in services.items():
         if (i % 2) == 0:
             col1, col2 = st.columns(2)
-            col1.markdown(service)
+            col1.markdown(
+                f"<h2 style='text-align: center; font-family: {FONT};'> \
+                {service}<h2>",
+                unsafe_allow_html=True,
+                )
             col2.image(view)
             i += 1
         else:
             col1, col2 = st.columns(2)
             col1.image(view)
-            col2.markdown(service)
+            col2.markdown(
+                f"<h2 style='text-align: center; font-family: {FONT};'> \
+                {service}<h2>",
+                unsafe_allow_html=True,
+                )
             i += 1
 
 

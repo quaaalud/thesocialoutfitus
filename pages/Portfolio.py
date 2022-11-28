@@ -12,6 +12,7 @@ sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
 import __add_background_from_local__ as add_bg
 
 FONT = 'Ink Free'
+FONT1 = 'Papyrus'
 
 
 def _get_portofolio_contents(file_type: str) -> dict:

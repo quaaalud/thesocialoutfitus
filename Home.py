@@ -15,13 +15,14 @@ sys.path.append(str(DATA_PATH))
 sys.path.append(str(Path(PurePath(__file__).parent, 'pages')))
 
 FONT = 'Ink Free'
+FONT1 = 'Papyrus'
 
 def main():
     st.set_page_config(
         layout="wide",
         page_title='The Social Outfit',
         )
-    global FONT
+    global FONT, FONT1
     import Contacts
     import Portfolio
     import Services
@@ -49,13 +50,13 @@ def main():
             col3.image(return_image_from_path(str(logo_path)))
     st.empty()
     st.markdown(
-        "<h1 style='text-align: center; font-family: {FONT};'> \
+        f"<h1 style='text-align: center; font-family: {FONT};'> \
         Welcome to The Social Outfit</h1>",
         unsafe_allow_html=True
         )
     st.empty()
     st.markdown(
-        "<h2 style='text-align: center; font-family:papyrus;'> \
+        f"<h2 style='text-align: center; font-family:{FONT1};'> \
         Saving you time so your business can do what it's best at!</h2>",
         unsafe_allow_html=True
         )

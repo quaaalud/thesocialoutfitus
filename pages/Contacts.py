@@ -14,7 +14,8 @@ sys.path.append(str(Path(PurePath(__file__).parents[1], '.data')))
 import __add_background_from_local__ as add_bg
 import __send_message_to_email__ as send_email
 
-
+FONT = 'Ink Free'
+FONT1 = 'Papyrus'
 TSO_EMAIL = 'thesocialoutfits@gmail.com'  # Uncomment this line when live
 # TSO_EMAIL = 'dludwins@outlook.com'
 
@@ -105,6 +106,7 @@ def contacts_page_main():
     except:
         pass
     global TSO_EMAIL
+    global FONT, FONT1
     logo_path = Path(
         PurePath(__file__).parents[1],
         PurePath('.data/images/Logo')
@@ -158,7 +160,11 @@ def contacts_page_main():
                     subject=email,
                     body=_concat_all_dict_values(message_info),
                     )
-                st.write('Message Sent!')
+                st.markdown(
+                    f"<p style='text-align: center; font-family: {FONT};'> \
+                    Message Sent</p>",
+                    unsafe_allow_html=True
+                    )
 
 
 if __name__ == '__main__':
