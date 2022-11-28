@@ -10,6 +10,7 @@ from pathlib import Path, PurePath
 import sys
 sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
 import __add_background_from_local__ as add_bg
+from __get_image_to_display__ import return_image_from_path
 
 FONT = 'Ink Free'
 FONT1 = 'Papyrus'
@@ -117,10 +118,6 @@ def _assign_music_to_tab(msc_tab: st.tabs) -> st.audio:
 
 def _portfolio_page_func():
     global FONT
-    logo_path = Path(
-        PurePath(__file__).parents[1],
-        PurePath('.data/images/Logo')
-    )
 #    add_bg.add_bg_from_local(str(Path(logo_path, 'Social Outfit Logo.png')))
     st.markdown(
         f"<h1 style='text-align: center; font-family: {FONT};'>\
@@ -144,14 +141,17 @@ def _portfolio_page_func():
 
 
 def portfolio_page_main():
+    logo_path = str(
+        Path(PurePath(__file__).parents[1],
+             '.data', 'images', 'Logo', 'Social Outfit Logo.png'
+             )
+        )
     st.set_page_config(
         layout="wide",
         page_title='The Social Outfit - Portfolio',
+        page_icon=return_image_from_path(logo_path),
         )
     _portfolio_page_func()
-
-
-
 
 
 if __name__ == '__main__':

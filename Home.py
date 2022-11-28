@@ -31,7 +31,7 @@ def main():
     st.set_page_config(
         layout='wide',
         page_title='The Social Outfit',
-        page_icon=logo_path,
+        page_icon=return_image_from_path(logo_path),
         menu_items=None,
         initial_sidebar_state='collapsed',
         )

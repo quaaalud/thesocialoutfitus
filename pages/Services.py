@@ -10,6 +10,7 @@ from pathlib import Path, PurePath
 import sys
 sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
 import __add_background_from_local__ as add_bg
+from __get_image_to_display__ import return_image_from_path
 
 FONT = 'Ink Free'
 FONT1 = 'Papyrus'
@@ -51,13 +52,22 @@ def _return_services_with_display() -> dict:
 
 def services_page_main():
     global FONT, FONT1
+    logo_path = str(
+        Path(PurePath(__file__).parents[1],
+             '.data', 'images', 'Logo', 'Social Outfit Logo.png'
+             )
+        )
     try:
         st.set_page_config(
             layout="wide",
             page_title='The Social Outfit - Services',
+            page_icon=return_image_from_path(logo_path),
             )
     except:
-        pass
+        st.set_page_config(
+            page_title='The Social Outfit - Services',
+            page_icon=return_image_from_path(logo_path),
+            )
     services = _return_services_with_display()
     st.markdown(
         f"<h1 style='text-align: center; font-family: {FONT};'> \

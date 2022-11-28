@@ -13,6 +13,7 @@ sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
 sys.path.append(str(Path(PurePath(__file__).parents[1], '.data')))
 import __add_background_from_local__ as add_bg
 import __send_message_to_email__ as send_email
+from __get_image_to_display__ import return_image_from_path
 
 FONT = 'Ink Free'
 FONT1 = 'Papyrus'
@@ -98,13 +99,22 @@ def contacts_page_main():
     None.
 
     """
+    logo_path = str(
+        Path(PurePath(__file__).parents[1],
+             '.data', 'images', 'Logo', 'Social Outfit Logo.png'
+             )
+        )
     try:
         st.set_page_config(
             layout="wide",
             page_title='The Social Outfit - Contact Us',
+            page_icon=return_image_from_path(logo_path),
             )
     except:
-        pass
+        st.set_page_config(
+            page_title='The Social Outfit - Contact Us',
+            page_icon=return_image_from_path(logo_path),
+            )
     global TSO_EMAIL
     global FONT, FONT1
     logo_path = Path(
