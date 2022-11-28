@@ -18,10 +18,6 @@ FONT = 'Ink Free'
 FONT1 = 'Papyrus'
 
 def main():
-    st.set_page_config(
-        layout="wide",
-        page_title='The Social Outfit',
-        )
     global FONT, FONT1
     import Contacts
     import Portfolio
@@ -32,6 +28,13 @@ def main():
     logo_path = str(Path(IMG_PATH, 'Logo', 'Social Outfit Logo.png'))
     white_logo = str(
         Path(IMG_PATH, 'Logo', 'Social Outfit Logo All White.png'))
+    st.set_page_config(
+        layout='wide',
+        page_title='The Social Outfit',
+        page_icon=logo_path,
+        menu_items=None,
+        initial_sidebar_state='collapsed',
+        )
     with st.container():
         with st.container():
             col1, col2, col3 = st.columns(3)
