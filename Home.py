@@ -30,11 +30,19 @@ def main():
         Path(IMG_PATH, 'Logo', 'Social Outfit Logo All White.png'))
     st.set_page_config(
         layout='wide',
-        page_title='The Social Outfit',
+        page_title='The Social Outfit - Home',
         page_icon=return_image_from_path(logo_path),
         menu_items=None,
         initial_sidebar_state='collapsed',
         )
+    # Hide mainmenu and footer
+    hide_streamlit_style = """
+                <style>
+                #MainMenu {visibility: hidden;}
+                footer {visibility: hidden;}
+                </style>
+                """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     with st.container():
         with st.container():
             col1, col2, col3 = st.columns(3)
@@ -69,11 +77,6 @@ def main():
         Portfolio._portfolio_page_func()
     with st.expander('See the current services offered'):
         Services.services_page_main()
-
-
-def _get_db_connection():
-    import __pathconstants__
-    import __createdatabase__
 
 
 if __name__ == '__main__':

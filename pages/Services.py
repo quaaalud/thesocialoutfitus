@@ -63,11 +63,8 @@ def services_page_main():
             page_title='The Social Outfit - Services',
             page_icon=return_image_from_path(logo_path),
             )
-    except:
-        st.set_page_config(
-            page_title='The Social Outfit - Services',
-            page_icon=return_image_from_path(logo_path),
-            )
+    except st.errors.StreamlitAPIException:
+        pass
     services = _return_services_with_display()
     st.markdown(
         f"<h1 style='text-align: center; font-family: {FONT};'> \

@@ -25,7 +25,7 @@ client_id = os.getenv('PRIVATE_CLIENT_ID')
 client_pass = os.getenv('PRIVATE_CLIENT_SECRET')
 
 
-def get_creds():
+def get_creds() -> dict:
     SCOPES = ['https://mail.google.com/']
     creds = None
     if os.path.exists('token.json'):
@@ -55,8 +55,7 @@ def build_message(destination:str, subject:str, body:str) -> dict:
     }
 
 
-def send_message(message:dict, creds=get_creds()) -> None:
-
+def send_message(message:dict, creds=get_creds()) -> dict:
     with build('gmail', 'v1', credentials=creds) as s:
         s.users().messages().send(userId="me", body=message).execute()
     return message
@@ -64,7 +63,7 @@ def send_message(message:dict, creds=get_creds()) -> None:
 
 def capture_and_send_email(dest=os.getenv('PRIVATE_USERNAME'),
                            subject=None,
-                           body=None):
+                           body=None) -> dict:
     if subject or body:
         message = build_message(dest, subject, body)
         return send_message(message)

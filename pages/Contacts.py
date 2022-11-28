@@ -86,6 +86,33 @@ def _display_current_team_members():
     )
 
 
+def _email_form_func() -> None:
+    name = st.text_input('Your Name:', max_chars=30)
+    email = st.text_input('Email:', max_chars=50)
+    phone = st.text_input('Phone:', max_chars=20)
+    question = st.text_area('How can we help you:',
+                            height=40,
+                            max_chars=500,
+                            )
+    message_info = get_contact_info(name,
+                                    email,
+                                    phone=phone,
+                                    message=question
+                                    )
+    if message_info:
+        if st.button('Submit'):
+            send_email.capture_and_send_email(
+                dest=TSO_EMAIL,
+                subject=email,
+                body=_concat_all_dict_values(message_info),
+                )
+            st.markdown(
+                f"<p style='text-align: center; font-family: {FONT};'> \
+                Message Sent</p>",
+                unsafe_allow_html=True
+                )
+
+
 def contacts_page_main():
     """
 
@@ -109,18 +136,11 @@ def contacts_page_main():
             layout="wide",
             page_title='The Social Outfit - Contact Us',
             page_icon=return_image_from_path(logo_path),
-            )
-    except:
-        st.set_page_config(
-            page_title='The Social Outfit - Contact Us',
-            page_icon=return_image_from_path(logo_path),
-            )
+        )
+    except st.errors.StreamlitAPIException:
+        pass
     global TSO_EMAIL
     global FONT, FONT1
-    logo_path = Path(
-        PurePath(__file__).parents[1],
-        PurePath('.data/images/Logo')
-    )
     # add_bg.add_bg_from_local(str(Path(logo_path,
     #                                  'Social Outfit Logo.png'))
     #                         )
@@ -130,51 +150,9 @@ def contacts_page_main():
     try:
         my_expander = st.expander(label='Click Here to Message Us')
         with my_expander:
-            name = st.text_input('Your Name:', max_chars=30)
-            email = st.text_input('Email:', max_chars=50)
-            phone = st.text_input('Phone:', max_chars=20)
-            question = st.text_area('How can we help you:',
-                                    height=40,
-                                    max_chars=500,
-                                    )
-            message_info = get_contact_info(name,
-                                            email,
-                                            phone=phone,
-                                            message=question
-                                            )
-            if message_info:
-                if st.button('Submit'):
-                    send_email.capture_and_send_email(
-                        dest=TSO_EMAIL,
-                        subject=email,
-                        body=_concat_all_dict_values(message_info),
-                        )
-                    st.write('Message Sent!')
+            _email_form_func()
     except:
-        name = st.text_input('Your Name:', max_chars=30)
-        email = st.text_input('Email:', max_chars=50)
-        phone = st.text_input('Phone:', max_chars=20)
-        question = st.text_area('How can we help you:',
-                                height=40,
-                                max_chars=500,
-                                )
-        message_info = get_contact_info(name,
-                                        email,
-                                        phone=phone,
-                                        message=question
-                                        )
-        if message_info:
-            if st.button('Submit'):
-                send_email.capture_and_send_email(
-                    dest=TSO_EMAIL,
-                    subject=email,
-                    body=_concat_all_dict_values(message_info),
-                    )
-                st.markdown(
-                    f"<p style='text-align: center; font-family: {FONT};'> \
-                    Message Sent</p>",
-                    unsafe_allow_html=True
-                    )
+        _email_form_func()
 
 
 if __name__ == '__main__':
