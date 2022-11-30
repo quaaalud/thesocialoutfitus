@@ -50,21 +50,7 @@ def _return_services_with_display() -> dict:
     }
 
 
-def services_page_main():
-    global FONT, FONT1
-    logo_path = str(
-        Path(PurePath(__file__).parents[1],
-             '.data', 'images', 'Logo', 'Social Outfit Logo.png'
-             )
-        )
-    try:
-        st.set_page_config(
-            layout="wide",
-            page_title='The Social Outfit - Services',
-            page_icon=return_image_from_path(logo_path),
-            )
-    except st.errors.StreamlitAPIException:
-        pass
+def _services_page_func() -> None:
     services = _return_services_with_display()
     st.markdown(
         f"<h1 style='text-align: center; font-family: {FONT};'> \
@@ -91,6 +77,29 @@ def services_page_main():
                 unsafe_allow_html=True,
                 )
             i += 1
+
+
+def services_page_main():
+    global FONT, FONT1
+    import Contacts
+    logo_path = str(
+        Path(PurePath(__file__).parents[1],
+             '.data', 'images', 'Logo', 'Social Outfit Logo.png'
+             )
+        )
+    try:
+        st.set_page_config(
+            layout="wide",
+            page_title='The Social Outfit - Services',
+            page_icon=return_image_from_path(logo_path),
+            )
+    except st.errors.StreamlitAPIException:
+        pass
+    _services_page_func()
+    with st.expander('Send Us a Message:'):
+        Contacts._email_form_func()
+
+
 
 
 if __name__ == '__main__':

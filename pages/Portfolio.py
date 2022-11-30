@@ -71,6 +71,34 @@ def _assign_data_to_tab(tab_name, _title, _retfunc):
         st.write(_retfunc())
 
 
+def _assign_images_to_tab(img_tab: st.tabs) -> st.image:
+    img_dict = _return_images()
+    i = 0
+    for name, img in img_dict.items():
+        with img_tab:
+            cols = [col for col in st.columns(len([img_dict.keys()]))]
+            with st.container():
+                for col in [col for col in cols]:
+                    if (i % 2) == 0:
+                        col1, col2 = st.columns(2)
+                        col1.image(return_image_from_path(img))
+                        col2.markdown(
+                            f"\
+            <p style='text-align: left; font-family: {FONT};'>{str(name)}</p>",
+                            unsafe_allow_html=True,
+                            )
+                        i += 1
+                    else:
+                        col1, col2 = st.columns(2)
+                        col1.markdown(
+                            f"\
+            <p style='text-align: left; font-family: {FONT};'>{str(name)}</p>",
+                            unsafe_allow_html=True,
+                            )
+                        col2.image(return_image_from_path(img))
+                        i += 1
+
+
 def _assign_videos_to_tab(vdo_tab: st.tabs) -> st.video:
     vid_types = ['.mp4', '.ogg', '.mov']
     all_videos = {name: vid for name, vid in _return_videos().items() if
@@ -84,14 +112,21 @@ def _assign_videos_to_tab(vdo_tab: st.tabs) -> st.video:
                     if (i % 2) == 0:
                         col1, col2 = st.columns(2)
                         col1.video(open(vid, 'rb'))
-                        col2.caption(name)
+                        col2.markdown(
+                            f"\
+            <p style='text-align: left; font-family: {FONT};'>{str(name)}</p>",
+                            unsafe_allow_html=True,
+                            )
                         i += 1
                     else:
                         col1, col2 = st.columns(2)
-                        col2.caption(name)
+                        col1.markdown(
+                            f"\
+            <p style='text-align: left; font-family: {FONT};'>{str(name)}</p>",
+                            unsafe_allow_html=True,
+                            )
                         col2.video(open(vid, 'rb'))
                         i += 1
-
 
 
 def _assign_music_to_tab(msc_tab: st.tabs) -> st.audio:
@@ -129,18 +164,17 @@ def _portfolio_page_func():
         Recent Projects</h1>",
         unsafe_allow_html=True
         )
-    for _file in _display_newest_files():
-        st.write(_file)
     ani_tab, img_tab, msc_tab, vdo_tab = st.tabs([
         'Animations', 'Images', 'Music', 'Videos'
     ])
     _assign_data_to_tab(ani_tab, 'Animations', _return_animations)
-    _assign_data_to_tab(img_tab, 'Images', _return_images)
+    _assign_images_to_tab(img_tab)
     _assign_music_to_tab(msc_tab)
     _assign_videos_to_tab(vdo_tab)
 
 
 def portfolio_page_main():
+    import Contacts
     logo_path = str(
         Path(PurePath(__file__).parents[1],
              '.data', 'images', 'Logo', 'Social Outfit Logo.png'
@@ -152,6 +186,8 @@ def portfolio_page_main():
         page_icon=return_image_from_path(logo_path),
         )
     _portfolio_page_func()
+    with st.expander('Send Us a Message:'):
+        Contacts._email_form_func()
 
 
 if __name__ == '__main__':

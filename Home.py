@@ -72,11 +72,11 @@ def main():
         unsafe_allow_html=True
         )
     with st.expander('Contact Us Today'):
-        Contacts.contacts_page_main()
+        Contacts._email_form_func()
     with st.expander('Take a look at what we can do for you'):
         Portfolio._portfolio_page_func()
     with st.expander('See the current services offered'):
-        Services.services_page_main()
+        Services._services_page_func()
 
 
 if __name__ == '__main__':

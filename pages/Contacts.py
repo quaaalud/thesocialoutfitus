@@ -148,9 +148,9 @@ def contacts_page_main():
     st.subheader(f'Send us an email directly: {TSO_EMAIL}')
     st.write('Message us today to get the help you have been looking for!')
     try:
-        my_expander = st.expander(label='Click Here to Message Us')
-        with my_expander:
+        with st.expander(label='Click Here to Message Us'):
             _email_form_func()
+
     except:
         _email_form_func()
 
