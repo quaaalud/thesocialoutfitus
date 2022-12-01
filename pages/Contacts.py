@@ -131,6 +131,12 @@ def contacts_page_main():
              '.data', 'images', 'Logo', 'Social Outfit Logo.png'
              )
         )
+    hide_streamlit_style = """
+                <style>
+                #MainMenu {visibility: hidden;}
+                footer {visibility: hidden;}
+                </style>
+                """
     try:
         st.set_page_config(
             layout="wide",

@@ -6,6 +6,7 @@ Created on Sat Nov  5 09:30:24 2022
 """
 
 import streamlit as st
+import base64
 from pathlib import Path, PurePath
 import sys
 sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
@@ -99,34 +100,61 @@ def _assign_images_to_tab(img_tab: st.tabs) -> st.image:
                         i += 1
 
 
-def _assign_videos_to_tab(vdo_tab: st.tabs) -> st.video:
+def _assign_videos_to_tab() -> st.video:
     vid_types = ['.mp4', '.ogg', '.mov']
     all_videos = {name: vid for name, vid in _return_videos().items() if
-                  Path(vid).suffix in vid_types}
+                  str(Path(vid).suffix).lower() in vid_types}
     i = 0
     for name, vid in all_videos.items():
-        with vdo_tab:
+        with st.container():
             cols = [col for col in st.columns(len([all_videos.keys()]))]
-            with st.container():
-                for col in [col for col in cols]:
-                    if (i % 2) == 0:
-                        col1, col2 = st.columns(2)
-                        col1.video(open(vid, 'rb'))
-                        col2.markdown(
-                            f"\
-            <p style='text-align: left; font-family: {FONT};'>{str(name)}</p>",
-                            unsafe_allow_html=True,
-                            )
-                        i += 1
-                    else:
-                        col1, col2 = st.columns(2)
-                        col1.markdown(
-                            f"\
-            <p style='text-align: left; font-family: {FONT};'>{str(name)}</p>",
-                            unsafe_allow_html=True,
-                            )
-                        col2.video(open(vid, 'rb'))
-                        i += 1
+            for col in [col for col in cols]:
+                if (i % 2) == 0:
+                    col1, col2 = st.columns(2)
+                    col1.video(open(vid, 'rb'))
+                    col2.markdown(
+                        f"\
+        <p style='text-align: left; font-family: {FONT};'>{str(name)}</p>",
+                        unsafe_allow_html=True,
+                        )
+                    i += 1
+                else:
+                    col1, col2 = st.columns(2)
+                    col1.markdown(
+                        f"\
+        <p style='text-align: left; font-family: {FONT};'>{str(name)}</p>",
+                        unsafe_allow_html=True,
+                        )
+                    col2.video(open(vid, 'rb'))
+                    i += 1
+
+
+def _assign_animations_to_tab() -> None:
+    gif_files = {
+        name: gif for name, gif in _return_animations().items() if
+        'gif' in str(Path(gif).suffix).lower()
+        }
+    i = 0
+    for name, gif in gif_files.items():
+        with st.container():
+            cols = [col for col in st.columns(len([gif_files.keys()]))]
+            for col in [col for col in cols]:
+                if (i % 2) == 0:
+                    file_ = open(str(gif), "rb")
+                    contents = file_.read()
+                    data_url = base64.b64encode(contents).decode("utf-8")
+                    file_.close()
+                    col1, col2 = st.columns(2)
+                    col1.markdown(
+                        f"\
+        <p style='text-align: left; font-family: {FONT};'>{str(name)}</p>",
+                        unsafe_allow_html=True,
+                        )
+                    col2.markdown(
+                        f'<img src="data:image/gif;base64,{data_url}">',
+                        unsafe_allow_html=True,
+                        )
+                    return None
 
 
 def _assign_music_to_tab(msc_tab: st.tabs) -> st.audio:
@@ -169,11 +197,19 @@ def _portfolio_page_func():
     ])
     _assign_images_to_tab(img_tab)
     _assign_music_to_tab(msc_tab)
-    _assign_videos_to_tab(vdo_tab)
+    with vdo_tab:
+        _assign_animations_to_tab()
+        _assign_videos_to_tab()
 
 
 def portfolio_page_main():
     import Contacts
+    hide_streamlit_style = """
+                <style>
+                #MainMenu {visibility: hidden;}
+                footer {visibility: hidden;}
+                </style>
+                """
     logo_path = str(
         Path(PurePath(__file__).parents[1],
              '.data', 'images', 'Logo', 'Social Outfit Logo.png'

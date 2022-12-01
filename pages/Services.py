@@ -82,6 +82,12 @@ def _services_page_func() -> None:
 def services_page_main():
     global FONT, FONT1
     import Contacts
+    hide_streamlit_style = """
+                <style>
+                #MainMenu {visibility: hidden;}
+                footer {visibility: hidden;}
+                </style>
+                """
     logo_path = str(
         Path(PurePath(__file__).parents[1],
              '.data', 'images', 'Logo', 'Social Outfit Logo.png'

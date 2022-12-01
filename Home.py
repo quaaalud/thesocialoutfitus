@@ -61,7 +61,7 @@ def main():
         )
     st.empty()
     st.markdown(
-        f"<h2 style='text-align: center; font-family:{FONT1};'> \
+        f"<h2 style='text-align: center; font-family:{FONT};'> \
         Saving you time so your business can do what it's best at!</h2>",
         unsafe_allow_html=True
         )
