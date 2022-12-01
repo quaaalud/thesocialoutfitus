@@ -23,7 +23,7 @@ def _return_services_with_display() -> dict:
         PurePath('.data')
     )
     media_display = Path(data_path,
-                         'images/Logo/Social Outfit Logo.png'
+                         'images/Demo 3.jpg'
                          )
     se_display = Path(data_path,
                       'images/Logo/Social Outfit Logo All White.png'
@@ -32,7 +32,7 @@ def _return_services_with_display() -> dict:
                         'images/Logo/Social Outfit Logo.png'
                         )
     wa_display = Path(data_path,
-                      'images/Logo/Social Outfit Logo All White.png'
+                      'images/Demo 2.jpg'
                       )
     return {
         'Build your Social Media Presence': return_image_from_path(

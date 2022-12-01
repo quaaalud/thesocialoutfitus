@@ -28,6 +28,10 @@ def main():
     logo_path = str(Path(IMG_PATH, 'Logo', 'Social Outfit Logo.png'))
     white_logo = str(
         Path(IMG_PATH, 'Logo', 'Social Outfit Logo All White.png'))
+    city_logo = str(
+        Path(IMG_PATH, 'Logo', 'The Social Outfit.png'))
+    car_path = str(Path(IMG_PATH, 'Demo 1.jpg'))
+    city_path = str(Path(IMG_PATH, 'Demo 5.jpg'))
     st.set_page_config(
         layout='wide',
         page_title='The Social Outfit - Home',
@@ -46,19 +50,9 @@ def main():
     with st.container():
         with st.container():
             col1, col2, col3 = st.columns(3)
-            col1.image(return_image_from_path(str(logo_path)))
-            col2.image(return_image_from_path(str(white_logo)))
-            col3.image(return_image_from_path(str(logo_path)))
-        with st.container():
-            col1, col2, col3 = st.columns(3)
-            col1.image(return_image_from_path(str(white_logo)))
-            col2.image(return_image_from_path(str(logo_path)))
-            col3.image(return_image_from_path(str(white_logo)))
-        with st.container():
-            col1, col2, col3 = st.columns(3)
-            col1.image(return_image_from_path(str(logo_path)))
-            col2.image(return_image_from_path(str(white_logo)))
-            col3.image(return_image_from_path(str(logo_path)))
+            col1.image(return_image_from_path(str(car_path)))
+            col2.image(return_image_from_path(str(city_logo)))
+            col3.image(return_image_from_path(str(city_path)))
     st.empty()
     st.markdown(
         f"<h1 style='text-align: center; font-family: {FONT};'> \
