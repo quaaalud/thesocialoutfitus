@@ -22,29 +22,62 @@ def _return_services_with_display() -> dict:
         PurePath(__file__).parents[1],
         PurePath('.data')
     )
-    media_display = Path(data_path,
-                         'images/Demo 3.jpg'
-                         )
-    se_display = Path(data_path,
-                      'images/Logo/Social Outfit Logo All White.png'
-                      )
-    logo_display = Path(data_path,
-                        'images/Logo/Social Outfit Logo.png'
-                        )
-    wa_display = Path(data_path,
-                      'images/Demo 2.jpg'
-                      )
+    media_description = """\
+Custom Content created for your
+Business or Platform ranging from
+Simple Jingles to Full Commercials
+allowing you to focus on providing
+quality Services and Products
+"""
+    seo_description = """\
+Proividing Search Engine Optimization
+(SEO) ensures potential customers
+see how you can help them as reports
+show average consumers never leave
+page 1 of their preferred search engine.
+DO NOT LET COMPETITORS BEAT YOU TO THE TOP!
+"""
+    logo_desription = """\
+Logo creation for your Business of Event
+Making a postive impression all starts with
+what the customer sees when they land on your
+webpage or walk up to see you in person
+"""
+    web_description = """\
+We will create custom Web Applications to
+simplify your Daily Tasks or save
+you countless hours of auditing or tracking
+for your Buisness or Event.
+Can be for "in-house" use only
+or used for Public Facing services also!
+"""
+    media_display = Path(
+        data_path,
+        'images/Demo 3.jpg'
+        )
+    se_display = Path(
+        data_path,
+        'images/Logo/Social Outfit Logo All White.png'
+        )
+    logo_display = Path(
+        data_path,
+        'images/Logo/Social Outfit Logo.png'
+        )
+    wa_display = Path(
+        data_path,
+        'images/Demo 2.jpg'
+        )
     return {
-        'Build your Social Media Presence': return_image_from_path(
+        media_description: return_image_from_path(
             media_display
             ),
-        'Search Engine Optimization': return_image_from_path(
+        seo_description: return_image_from_path(
             se_display
             ),
-        'Logo Creation': return_image_from_path(
+        logo_desription: return_image_from_path(
             logo_display
             ),
-        'Simple Web App Creation': return_image_from_path(
+        web_description: return_image_from_path(
             wa_display
             ),
     }
@@ -53,7 +86,7 @@ def _return_services_with_display() -> dict:
 def _services_page_func() -> None:
     services = _return_services_with_display()
     st.markdown(
-        f"<h1 style='text-align: center; font-family: {FONT};'> \
+        f"<h1 style='text-align: center; font-family: {FONT}; color:#DA0037;'> \
         <font size='+7'>Services</font><h2>",
         unsafe_allow_html=True,
         )
@@ -104,8 +137,6 @@ def services_page_main():
     _services_page_func()
     with st.expander('Send Us a Message:'):
         Contacts._email_form_func()
-
-
 
 
 if __name__ == '__main__':

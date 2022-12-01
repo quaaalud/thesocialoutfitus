@@ -183,7 +183,7 @@ def _portfolio_page_func():
     global FONT
 #    add_bg.add_bg_from_local(str(Path(logo_path, 'Social Outfit Logo.png')))
     st.markdown(
-        f"<h1 style='text-align: center; font-family: {FONT};'>\
+        f"<h1 style='text-align: center; font-family: {FONT}; color:#DA0037;'>\
         Portfolio</h1>",
         unsafe_allow_html=True
         )
