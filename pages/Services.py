@@ -12,7 +12,7 @@ sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
 import __add_background_from_local__ as add_bg
 from __get_image_to_display__ import return_image_from_path
 
-FONT = 'Ink Free'
+FONT = 'Nanum Gothic'
 FONT1 = 'Papyrus'
 
 
@@ -30,12 +30,13 @@ allowing you to focus on providing
 quality Services and Products
 """
     seo_description = """\
-Proividing Search Engine Optimization
+Providing Search Engine Optimization
 (SEO) ensures potential customers
 see how you can help them as reports
 show average consumers never leave
 page 1 of their preferred search engine.
-DO NOT LET COMPETITORS BEAT YOU TO THE TOP!
+More simply put, giving you an advantage over your
+competitors, quite literally.
 """
     logo_desription = """\
 Logo creation for your Business of Event
@@ -86,30 +87,18 @@ or used for Public Facing services also!
 def _services_page_func() -> None:
     services = _return_services_with_display()
     st.markdown(
-        f"<h1 style='text-align: center; font-family: {FONT}; color:#DA0037;'> \
-        <font size='+7'>Services</font><h2>",
+        f"<h1 style='text-align: center; font-family: {FONT}; color:#EDEDED;'> \
+        Services<h2>",
         unsafe_allow_html=True,
         )
-    i = 0
     for service, view in services.items():
-        if (i % 2) == 0:
-            col1, col2 = st.columns(2)
-            col1.markdown(
-                f"<h2 style='text-align: center; font-family: {FONT};'> \
-                {service}<h2>",
-                unsafe_allow_html=True,
-                )
-            col2.image(view)
-            i += 1
-        else:
-            col1, col2 = st.columns(2)
-            col1.image(view)
-            col2.markdown(
-                f"<h2 style='text-align: center; font-family: {FONT};'> \
-                {service}<h2>",
-                unsafe_allow_html=True,
-                )
-            i += 1
+        col1, col2 = st.columns([1.5, 1])
+        col1.markdown(
+            f"<h2 style='text-align: center; font-family: {FONT};'> \
+            <font size=6em>{service}</font></h2>",
+            unsafe_allow_html=True,
+            )
+        col2.image(view)
 
 
 def services_page_main():
@@ -121,6 +110,7 @@ def services_page_main():
                 footer {visibility: hidden;}
                 </style>
                 """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     logo_path = str(
         Path(PurePath(__file__).parents[1],
              '.data', 'images', 'Logo', 'Social Outfit Logo.png'

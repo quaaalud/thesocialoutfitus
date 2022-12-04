@@ -137,6 +137,7 @@ def contacts_page_main():
                 footer {visibility: hidden;}
                 </style>
                 """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     try:
         st.set_page_config(
             layout="wide",

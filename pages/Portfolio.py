@@ -13,7 +13,7 @@ sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
 import __add_background_from_local__ as add_bg
 from __get_image_to_display__ import return_image_from_path
 
-FONT = 'Ink Free'
+FONT = 'Nanum Gothic'
 FONT1 = 'Papyrus'
 
 
@@ -74,59 +74,35 @@ def _assign_data_to_tab(tab_name, _title, _retfunc):
 
 def _assign_images_to_tab(img_tab: st.tabs) -> st.image:
     img_dict = _return_images()
-    i = 0
     for name, img in img_dict.items():
         with img_tab:
             cols = [col for col in st.columns(len([img_dict.keys()]))]
             with st.container():
                 for col in [col for col in cols]:
-                    if (i % 2) == 0:
-                        col1, col2 = st.columns(2)
-                        col1.image(return_image_from_path(img))
-                        col2.markdown(
-                            f"\
-            <p style='text-align: left; font-family: {FONT};'>{str(name)}</p>",
-                            unsafe_allow_html=True,
-                            )
-                        i += 1
-                    else:
-                        col1, col2 = st.columns(2)
-                        col1.markdown(
-                            f"\
-            <p style='text-align: left; font-family: {FONT};'>{str(name)}</p>",
-                            unsafe_allow_html=True,
-                            )
-                        col2.image(return_image_from_path(img))
-                        i += 1
+                    col1, col2 = st.columns([1, 2])
+                    col1.markdown(
+                        f"\
+        <h2 style='text-align: left; font-family: {FONT};'>{str(name)}</h2>",
+                        unsafe_allow_html=True,
+                        )
+                    col2.image(return_image_from_path(img))
 
 
 def _assign_videos_to_tab() -> st.video:
     vid_types = ['.mp4', '.ogg', '.mov']
     all_videos = {name: vid for name, vid in _return_videos().items() if
                   str(Path(vid).suffix).lower() in vid_types}
-    i = 0
     for name, vid in all_videos.items():
         with st.container():
             cols = [col for col in st.columns(len([all_videos.keys()]))]
             for col in [col for col in cols]:
-                if (i % 2) == 0:
-                    col1, col2 = st.columns(2)
-                    col1.video(open(vid, 'rb'))
-                    col2.markdown(
-                        f"\
-        <p style='text-align: left; font-family: {FONT};'>{str(name)}</p>",
-                        unsafe_allow_html=True,
-                        )
-                    i += 1
-                else:
-                    col1, col2 = st.columns(2)
-                    col1.markdown(
-                        f"\
-        <p style='text-align: left; font-family: {FONT};'>{str(name)}</p>",
-                        unsafe_allow_html=True,
-                        )
-                    col2.video(open(vid, 'rb'))
-                    i += 1
+                col1, col2 = st.columns([1, 2])
+                col1.markdown(
+                    f"\
+    <h2 style='text-align: left; font-family: {FONT};'>{str(name)}</h2>",
+                    unsafe_allow_html=True,
+                    )
+                col2.video(open(vid, 'rb'))
 
 
 def _assign_animations_to_tab() -> None:
@@ -139,22 +115,20 @@ def _assign_animations_to_tab() -> None:
         with st.container():
             cols = [col for col in st.columns(len([gif_files.keys()]))]
             for col in [col for col in cols]:
-                if (i % 2) == 0:
-                    file_ = open(str(gif), "rb")
-                    contents = file_.read()
-                    data_url = base64.b64encode(contents).decode("utf-8")
-                    file_.close()
-                    col1, col2 = st.columns(2)
-                    col1.markdown(
-                        f"\
-        <p style='text-align: left; font-family: {FONT};'>{str(name)}</p>",
-                        unsafe_allow_html=True,
-                        )
-                    col2.markdown(
-                        f'<img src="data:image/gif;base64,{data_url}">',
-                        unsafe_allow_html=True,
-                        )
-                    return None
+                file_ = open(str(gif), "rb")
+                contents = file_.read()
+                data_url = base64.b64encode(contents).decode("utf-8")
+                file_.close()
+                col1, col2 = st.columns(2)
+                col1.markdown(
+                    f"\
+    <h2 style='text-align: left; font-family: {FONT};'>{str(name)}</h2>",
+                    unsafe_allow_html=True,
+                    )
+                col2.markdown(
+                    f'<img src="data:image/gif;base64,{data_url}">',
+                    unsafe_allow_html=True,
+                    )
 
 
 def _assign_music_to_tab(msc_tab: st.tabs) -> st.audio:
@@ -170,7 +144,7 @@ def _assign_music_to_tab(msc_tab: st.tabs) -> st.audio:
             with msc_tab:
                 st.markdown(
                     f"\
-    <p style='text-align: left; font-family: {FONT};'>{str(song_name)}</p>",
+    <h2 style='text-align: left; font-family: {FONT};'>{str(song_name)}</h2>",
                     unsafe_allow_html=True,
                     )
                 st.audio(
@@ -183,7 +157,7 @@ def _portfolio_page_func():
     global FONT
 #    add_bg.add_bg_from_local(str(Path(logo_path, 'Social Outfit Logo.png')))
     st.markdown(
-        f"<h1 style='text-align: center; font-family: {FONT}; color:#DA0037;'>\
+        f"<h1 style='text-align: center; font-family: {FONT}; color:#EDEDED;'>\
         Portfolio</h1>",
         unsafe_allow_html=True
         )
@@ -210,6 +184,7 @@ def portfolio_page_main():
                 footer {visibility: hidden;}
                 </style>
                 """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     logo_path = str(
         Path(PurePath(__file__).parents[1],
              '.data', 'images', 'Logo', 'Social Outfit Logo.png'
