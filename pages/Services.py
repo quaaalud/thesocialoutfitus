@@ -54,19 +54,19 @@ or used for Public Facing services also!
 """
     media_display = Path(
         data_path,
-        'images/Demo 3.jpg'
+        'images/Services/Services1.jpg'
         )
     se_display = Path(
         data_path,
-        'images/Logo/Social Outfit Logo All White.png'
+        'images/Services/TagLine1.png'
         )
     logo_display = Path(
         data_path,
-        'images/Logo/Social Outfit Logo.png'
+        'images/Services/Services2.png'
         )
     wa_display = Path(
         data_path,
-        'images/Demo 2.jpg'
+        'images/Services/Tagline2.jpg'
         )
     return {
         media_description: return_image_from_path(
