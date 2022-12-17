@@ -25,18 +25,15 @@ def main():
     import __add_background_from_local__ as add_bg
     from __get_image_to_display__ import return_image_from_path
     global DATA_PATH, IMG_PATH
-    logo_path = str(Path(IMG_PATH, 'Logo', 'Social Outfit Logo.png'))
+#    logo_path = str(Path(IMG_PATH, 'Logo', 'Social Outfit Logo.png'))
     white_logo = str(
         Path(IMG_PATH, 'Logo', 'Social Outfit Logo All White.png'))
     city_logo = str(
         Path(IMG_PATH, 'Logo', 'The Social Outfit.png'))
-    car_path = str(Path(IMG_PATH, 'Demo 1.jpg'))
-    city_path = str(Path(IMG_PATH, 'Demo 5.jpg'))
-    bw_path = str(Path(IMG_PATH, 'Demo 4.jpg'))
     st.set_page_config(
         layout='wide',
         page_title='The Social Outfit - Home',
-        page_icon=return_image_from_path(logo_path),
+        page_icon=return_image_from_path(white_logo),
         menu_items=None,
         initial_sidebar_state='collapsed',
         )
@@ -47,13 +44,13 @@ def main():
                 footer {visibility: hidden;}
                 </style>
                 """
-    add_bg.add_bg_from_local(white_logo)
+    add_bg.add_bg_from_local(city_logo)
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     with st.container():
         with st.container():
             col1, col2, col3 = st.columns([.5, 1.5, .5])
             col1.empty()
-            col2.image(return_image_from_path(str(city_logo)))
+            col2.image(return_image_from_path(str(white_logo)))
             col3.empty()
     st.empty()
 #    st.markdown(
@@ -69,11 +66,9 @@ def main():
 #        )
     with st.expander('Contact Us Today'):
         Contacts._email_form_func()
-#    with st.expander('Take a look at what we can do for you'):
     with st.container():
         Portfolio._portfolio_page_func()
     with st.container():
-#    with st.expander('See the current services offered'):
         Services._services_page_func()
 
 

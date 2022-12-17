@@ -166,8 +166,8 @@ def _portfolio_page_func():
         Recent Projects</h1>",
         unsafe_allow_html=True
         )
-    img_tab, msc_tab, vdo_tab = st.tabs([
-        'Logos & Photography', 'Music & Sounds', 'Videos & Animation'
+    img_tab, vdo_tab, msc_tab = st.tabs([
+        'Brand Development', 'Videos & Animation', 'Content & App Creation'
     ])
     _assign_images_to_tab(img_tab)
     _assign_music_to_tab(msc_tab)
