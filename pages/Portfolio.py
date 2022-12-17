@@ -190,11 +190,14 @@ def portfolio_page_main():
              '.data', 'images', 'Logo', 'Social Outfit Logo.png'
              )
         )
-    st.set_page_config(
-        layout="wide",
-        page_title='The Social Outfit - Portfolio',
-        page_icon=return_image_from_path(logo_path),
-        )
+    try:
+        st.set_page_config(
+            layout="wide",
+            page_title='The Social Outfit - Portfolio',
+            page_icon=return_image_from_path(logo_path),
+            )
+    except:
+        pass
     _portfolio_page_func()
     with st.expander('Send Us a Message:'):
         Contacts._email_form_func()
