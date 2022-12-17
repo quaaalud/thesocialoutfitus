@@ -196,7 +196,7 @@ def portfolio_page_main():
             page_title='The Social Outfit - Portfolio',
             page_icon=return_image_from_path(logo_path),
             )
-    except:
+    except st.errors.StreamlitAPIException:
         pass
     _portfolio_page_func()
     with st.expander('Send Us a Message:'):
