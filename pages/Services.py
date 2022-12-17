@@ -54,7 +54,7 @@ or used for Public Facing services also!
 """
     media_display = Path(
         data_path,
-        'images/Services/Services1.jpg'
+        'images/Services/Services1.png'
         )
     se_display = Path(
         data_path,
@@ -66,7 +66,7 @@ or used for Public Facing services also!
         )
     wa_display = Path(
         data_path,
-        'images/Services/Tagline2.jpg'
+        'images/Services/Tagline2.png'
         )
     return {
         media_description: return_image_from_path(
