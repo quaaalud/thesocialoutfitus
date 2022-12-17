@@ -104,13 +104,6 @@ def _services_page_func() -> None:
 def services_page_main():
     global FONT, FONT1
     import Contacts
-    hide_streamlit_style = """
-                <style>
-                #MainMenu {visibility: hidden;}
-                footer {visibility: hidden;}
-                </style>
-                """
-    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     logo_path = str(
         Path(PurePath(__file__).parents[1],
              '.data', 'images', 'Logo', 'Social Outfit Logo.png'
@@ -123,7 +116,17 @@ def services_page_main():
             page_icon=return_image_from_path(logo_path),
             )
     except st.errors.StreamlitAPIException:
-        pass
+        st.set_page_config(
+            page_title='The Social Outfit - Services',
+            page_icon=return_image_from_path(logo_path),
+            )
+    hide_streamlit_style = """
+                <style>
+                #MainMenu {visibility: hidden;}
+                footer {visibility: hidden;}
+                </style>
+                """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     _services_page_func()
     with st.expander('Send Us a Message:'):
         Contacts._email_form_func()

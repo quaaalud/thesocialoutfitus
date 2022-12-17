@@ -166,8 +166,8 @@ def _portfolio_page_func():
         Recent Projects</h1>",
         unsafe_allow_html=True
         )
-    img_tab, msc_tab, vdo_tab = st.tabs([
-        'Logos & Photography', 'Music & Sounds', 'Videos & Animation'
+    img_tab, vdo_tab, msc_tab = st.tabs([
+        'Logo & Content Creation', 'Video & Animations', 'Custom Web Apps'
     ])
     _assign_images_to_tab(img_tab)
     _assign_music_to_tab(msc_tab)
@@ -178,6 +178,22 @@ def _portfolio_page_func():
 
 def portfolio_page_main():
     import Contacts
+    logo_path = str(
+        Path(PurePath(__file__).parents[1],
+             '.data', 'images', 'Logo', 'Social Outfit Logo All White.png'
+             )
+        )
+    try:
+        st.set_page_config(
+            layout="wide",
+            page_title='The Social Outfit - Portfolio',
+            page_icon=return_image_from_path(logo_path),
+            )
+    except st.errors.StreamlitAPIException:
+        st.set_page_config(
+            page_title='The Social Outfit - Portfolio',
+            page_icon=return_image_from_path(logo_path),
+            )
     hide_streamlit_style = """
                 <style>
                 #MainMenu {visibility: hidden;}
@@ -185,16 +201,6 @@ def portfolio_page_main():
                 </style>
                 """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-    logo_path = str(
-        Path(PurePath(__file__).parents[1],
-             '.data', 'images', 'Logo', 'Social Outfit Logo.png'
-             )
-        )
-    st.set_page_config(
-        layout="wide",
-        page_title='The Social Outfit - Portfolio',
-        page_icon=return_image_from_path(logo_path),
-        )
     _portfolio_page_func()
     with st.expander('Send Us a Message:'):
         Contacts._email_form_func()
