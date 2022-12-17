@@ -27,7 +27,7 @@ def main():
     global DATA_PATH, IMG_PATH
     logo_path = str(Path(IMG_PATH, 'Logo', 'Social Outfit Logo.png'))
     white_logo = str(
-        Path(IMG_PATH, 'Logo', 'Social Outfit Logo All White.png'))
+        Path(IMG_PATH, 'Services', 'Services1.png'))
     city_logo = str(
         Path(IMG_PATH, 'Logo', 'The Social Outfit.png'))
 #    car_path = str(Path(IMG_PATH, 'Demo 1.jpg'))
