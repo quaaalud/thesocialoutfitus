@@ -135,24 +135,25 @@ def _assign_music_to_tab(msc_tab: st.tabs) -> st.audio:
         '.wav': 'audio/wav',
     }
     all_music = _return_music()
-    for song_name, file_path in all_music.items():
-        if str(file_path.suffix) in file_types_dict.keys():
-            with msc_tab:
-                st.markdown(
-                    f"\
-    <h2 style='text-align: left; font-family: {FONT};'>{str(song_name)}</h2>",
-                    unsafe_allow_html=True,
-                    )
-                st.audio(
-                    str(file_path),
-                    file_types_dict.get(str(file_path.suffix))
-                    )
+    if len(all_music.keys()) > 0:
+        for song_name, file_path in all_music.items():
+            if str(file_path.suffix) in file_types_dict.keys():
+                with msc_tab:
+                    st.markdown(
+                        f"\
+        <h2 style='text-align: left; font-family: {FONT};'>{str(song_name)}</h2>",
+                        unsafe_allow_html=True,
+                        )
+                    st.audio(
+                        str(file_path),
+                        file_types_dict.get(str(file_path.suffix))
+                        )
 
 
 def _portfolio_page_func():
     global FONT
     st.markdown(
-        f"<h1 style='text-align: center; font-family: {FONT}; color:#EDEDED;'>\
+        f"<h1 style='text-align: center; font-family: {FONT};'>\
         Portfolio</h1>",
         unsafe_allow_html=True
         )
@@ -183,7 +184,7 @@ def portfolio_page_main():
         )
     try:
         st.set_page_config(
-            layout="wide",
+            layout="centered",
             page_title='The Social Outfit - Portfolio',
             page_icon=return_image_from_path(logo_path),
             )

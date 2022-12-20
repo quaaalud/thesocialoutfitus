@@ -11,14 +11,14 @@ from pathlib import Path, PurePath
 import sys
 sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
 sys.path.append(str(Path(PurePath(__file__).parents[1], '.data')))
-import __add_background_from_local__ as add_bg
 import __send_message_to_email__ as send_email
+import __get_team_members__ as get_team
 from __get_image_to_display__ import return_image_from_path
+
 
 FONT = 'Ink Free'
 FONT1 = 'Papyrus'
-TSO_EMAIL = 'thesocialoutfits@gmail.com'  # Uncomment this line when live
-# TSO_EMAIL = 'dludwins@outlook.com'
+TSO_EMAIL = 'thesocialoutfits@gmail.com'
 
 
 def get_contact_info(name: str,
@@ -77,13 +77,9 @@ def _concat_all_dict_values(dictionary: dict):
     return '\n\n'.join(all_vals)
 
 
+@st.cache(suppress_st_warning=True)
 def _display_current_team_members():
-    team_dir = Path(
-        PurePath(__file__).parents[1],
-        '.data',
-        '.database',
-        '.team'
-    )
+    return get_team._get_team_images()
 
 
 def _email_form_func() -> None:
@@ -128,16 +124,9 @@ def contacts_page_main():
     """
     logo_path = str(
         Path(PurePath(__file__).parents[1],
-             '.data', 'images', 'Logo', 'Social Outfit Logo.png'
+             '.data', 'images', 'Logo', 'The Social Outfit.png'
              )
         )
-    hide_streamlit_style = """
-                <style>
-                #MainMenu {visibility: hidden;}
-                footer {visibility: hidden;}
-                </style>
-                """
-    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     try:
         st.set_page_config(
             layout="wide",
@@ -146,20 +135,21 @@ def contacts_page_main():
         )
     except st.errors.StreamlitAPIException:
         pass
+    hide_streamlit_style = """
+                <style>
+                #MainMenu {visibility: hidden;}
+                footer {visibility: hidden;}
+                </style>
+                """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     global TSO_EMAIL
     global FONT, FONT1
-    # add_bg.add_bg_from_local(str(Path(logo_path,
-    #                                  'Social Outfit Logo.png'))
-    #                         )
     st.header('Contact Us')
     st.subheader(f'Send us an email directly: {TSO_EMAIL}')
     st.write('Message us today to get the help you have been looking for!')
-    try:
-        with st.expander(label='Click Here to Message Us'):
-            _email_form_func()
-
-    except:
-        _email_form_func()
+    _email_form_func()
+    
+        
 
 
 if __name__ == '__main__':

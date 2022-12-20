@@ -57,7 +57,7 @@ def _return_services_with_display() -> dict:
 def _services_page_func() -> None:
     services = _return_services_with_display()
     st.markdown(
-        f"<h1 style='text-align: center; font-family: {FONT}; color:#EDEDED;'>\
+        f"<h1 style='text-align: center; font-family: {FONT};'>\
         Services<h2>",
         unsafe_allow_html=True,
         )
@@ -75,10 +75,9 @@ def services_page_main():
     import Contacts
     try:
         st.set_page_config(
-            layout="wide",
+            layout="centered",
             page_title='The Social Outfit - Services',
-            page_icon=
-            return_image_from_path(
+            page_icon=return_image_from_path(
                 str(
                     Path(
                         Path(__file__).parents[1], 
