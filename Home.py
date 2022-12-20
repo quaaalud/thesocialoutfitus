@@ -22,18 +22,15 @@ def main():
     import Contacts
     import Portfolio
     import Services
-    import __add_background_from_local__ as add_bg
     from __get_image_to_display__ import return_image_from_path
     global DATA_PATH, IMG_PATH
-#    logo_path = str(Path(IMG_PATH, 'Logo', 'Social Outfit Logo.png'))
+    logo_path = str(Path(IMG_PATH, 'Logo', 'Social Outfit Logo.png'))
     white_logo = str(
         Path(IMG_PATH, 'Logo', 'Social Outfit Logo All White.png'))
-    city_logo = str(
-        Path(IMG_PATH, 'Logo', 'The Social Outfit.png'))
     st.set_page_config(
         layout='wide',
         page_title='The Social Outfit - Home',
-        page_icon=return_image_from_path(white_logo),
+        page_icon=return_image_from_path(logo_path),
         menu_items=None,
         initial_sidebar_state='collapsed',
         )
@@ -47,9 +44,12 @@ def main():
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     with st.container():
         with st.container():
-            col1, col2, col3 = st.columns([.5, 1.5, .5])
+            col1, col2, col3 = st.columns([.5, 2, .5])
             col1.empty()
-            col2.image(return_image_from_path(str(white_logo)))
+            col2.image(return_image_from_path(
+                str(white_logo)
+                ),
+                use_column_width='always')
             col3.empty()
     st.empty()
 #    st.markdown(

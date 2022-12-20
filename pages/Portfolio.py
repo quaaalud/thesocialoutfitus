@@ -34,18 +34,22 @@ def _get_portofolio_contents(file_type: str) -> dict:
     return dict(zip(file_names, sorted_dirs))
 
 
+@st.cache(suppress_st_warning=True)
 def _return_animations() -> dict:
     return _get_portofolio_contents('animations')
 
 
+@st.cache(suppress_st_warning=True)
 def _return_images() -> dict:
     return _get_portofolio_contents('images')
 
 
+@st.cache(suppress_st_warning=True)
 def _return_music() -> dict:
     return _get_portofolio_contents('music')
 
 
+@st.cache(suppress_st_warning=True)
 def _return_videos() -> dict:
     return _get_portofolio_contents('videos')
 

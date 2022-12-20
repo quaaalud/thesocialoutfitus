@@ -15,6 +15,7 @@ FONT = 'Nanum Gothic'
 FONT1 = 'Papyrus'
 
 
+@st.cache(suppress_st_warning=True)
 def _return_services_with_display() -> dict:
     from __get_image_to_display__ import return_image_from_path
     data_path = Path(
