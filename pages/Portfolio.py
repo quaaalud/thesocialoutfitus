@@ -10,7 +10,6 @@ import base64
 from pathlib import Path, PurePath
 import sys
 sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
-import __add_background_from_local__ as add_bg
 from __get_image_to_display__ import return_image_from_path
 
 FONT = 'Nanum Gothic'
@@ -22,7 +21,6 @@ def _get_portofolio_contents(file_type: str) -> dict:
     dirname = _paths.get_directory_path(file_type)
     try:
         dirlist = dirname.iterdir()
-
     except FileNotFoundError:
         import os
         os.mkdir(str(dirname))
