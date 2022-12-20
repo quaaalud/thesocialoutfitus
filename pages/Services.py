@@ -75,15 +75,15 @@ def services_page_main():
     import Contacts
     try:
         st.set_page_config(
-            layout="centered",
+            layout="wide",
             page_title='The Social Outfit - Services',
             page_icon=return_image_from_path(
                 str(
                     Path(
-                        Path(__file__).parents[1], 
-                        '.data', 
+                        Path(__file__).parents[1],
+                        '.data',
                         '.database',
-                        'services', 
+                        'services',
                         'Data Analytics & Web App Creation.png'
                         )
                     )

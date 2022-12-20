@@ -26,7 +26,7 @@ def main():
     global DATA_PATH, IMG_PATH
     logo_path = str(Path(IMG_PATH, 'Logo', 'Social Outfit Logo.png'))
     white_logo = str(
-        Path(IMG_PATH, 'Logo', 'Social Outfit Logo All White.png'))
+        Path(IMG_PATH, 'Logo', 'Social Outfit Logo All White Slim.png'))
     st.set_page_config(
         layout='wide',
         page_title='The Social Outfit - Home',
@@ -49,7 +49,8 @@ def main():
             col2.image(return_image_from_path(
                 str(white_logo)
                 ),
-                use_column_width='always')
+                width=500,
+                use_column_width='auto')
             col3.empty()
     st.empty()
 #    st.markdown(
@@ -69,6 +70,8 @@ def main():
         Portfolio._portfolio_page_func()
     with st.container():
         Services._services_page_func()
+    with st.container():
+        Contacts._display_current_team_members()
 
 
 if __name__ == '__main__':

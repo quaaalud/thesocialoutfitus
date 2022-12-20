@@ -78,8 +78,25 @@ def _concat_all_dict_values(dictionary: dict):
 
 
 @st.cache(suppress_st_warning=True)
-def _display_current_team_members():
+def _get_current_team_members():
     return get_team._get_team_images()
+
+
+def _display_current_team_members():
+    team_dict = _get_current_team_members()
+    with st.container():
+        col1, col2, col3 = st.columns(3)
+        for key, val in team_dict.items():
+            if 'Aaron' in key:
+                col1.image(return_image_from_path(val),
+                           caption=key)
+            elif 'Dale' in key:
+                col2.image(return_image_from_path(val),
+                           caption=key)
+            elif 'Jack' in key:
+                col3.image(return_image_from_path(val),
+                           caption=key)
+
 
 
 def _email_form_func() -> None:
@@ -148,8 +165,7 @@ def contacts_page_main():
     st.subheader(f'Send us an email directly: {TSO_EMAIL}')
     st.write('Message us today to get the help you have been looking for!')
     _email_form_func()
-    
-        
+    _display_current_team_members()
 
 
 if __name__ == '__main__':

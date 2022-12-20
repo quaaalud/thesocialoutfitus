@@ -176,15 +176,15 @@ def portfolio_page_main():
     import Contacts
     logo_path = str(
         Path(PurePath(__file__).parents[1],
-             '.data', 
-             'images', 
-             'Logo', 
+             '.data',
+             'images',
+             'Logo',
              'The Social Outfit.png'
              )
         )
     try:
         st.set_page_config(
-            layout="centered",
+            layout="wide",
             page_title='The Social Outfit - Portfolio',
             page_icon=return_image_from_path(logo_path),
             )
