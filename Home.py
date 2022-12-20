@@ -25,18 +25,15 @@ def main():
     import __add_background_from_local__ as add_bg
     from __get_image_to_display__ import return_image_from_path
     global DATA_PATH, IMG_PATH
-    logo_path = str(Path(IMG_PATH, 'Logo', 'Social Outfit Logo.png'))
+#    logo_path = str(Path(IMG_PATH, 'Logo', 'Social Outfit Logo.png'))
     white_logo = str(
         Path(IMG_PATH, 'Services', 'Services1.png'))
     city_logo = str(
         Path(IMG_PATH, 'Logo', 'The Social Outfit.png'))
-#    car_path = str(Path(IMG_PATH, 'Demo 1.jpg'))
-#    city_path = str(Path(IMG_PATH, 'Demo 5.jpg'))
-#    bw_path = str(Path(IMG_PATH, 'Demo 4.jpg'))
     st.set_page_config(
         layout='wide',
         page_title='The Social Outfit - Home',
-        page_icon=return_image_from_path(logo_path),
+        page_icon=return_image_from_path(white_logo),
         menu_items=None,
         initial_sidebar_state='collapsed',
         )

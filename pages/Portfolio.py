@@ -167,7 +167,7 @@ def _portfolio_page_func():
         unsafe_allow_html=True
         )
     img_tab, vdo_tab, msc_tab = st.tabs([
-        'Logo & Content Creation', 'Video & Animations', 'Custom Web Apps'
+        'Brand Development', 'Videos & Animation', 'Content & App Creation'
     ])
     _assign_images_to_tab(img_tab)
     _assign_music_to_tab(msc_tab)
