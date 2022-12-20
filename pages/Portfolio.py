@@ -57,7 +57,7 @@ def _display_newest_files() -> list:
     for file_type in filetypes:
         try:
             newest_files[file_type] = (
-                _get_portofolio_contents(file_type)[0]
+                _get_portofolio_contents(file_type)[0:5]
             )
         except KeyError:
             newest_files[file_type.capitalize()] = (
@@ -74,35 +74,33 @@ def _assign_data_to_tab(tab_name, _title, _retfunc):
 
 def _assign_images_to_tab(img_tab: st.tabs) -> st.image:
     img_dict = _return_images()
-    for name, img in img_dict.items():
-        with img_tab:
-            cols = [col for col in st.columns(len([img_dict.keys()]))]
-            with st.container():
-                for col in [col for col in cols]:
-                    col1, col2 = st.columns([1, 2])
-                    col1.markdown(
-                        f"\
-        <h2 style='text-align: left; font-family: {FONT};'>{str(name)}</h2>",
-                        unsafe_allow_html=True,
-                        )
-                    col2.image(return_image_from_path(img))
+    with img_tab:
+        col1, col2 = st.columns(2)
+        with st.container():
+            for i, (name, img) in enumerate(img_dict.items()):
+                if i < 10:
+                    if (i % 2) == 0:
+                        col1.image(
+                            return_image_from_path(img),
+                            use_column_width=True,
+                            caption=name,
+                            )
+                    else:
+                        col2.image(
+                            return_image_from_path(img),
+                            use_column_width=True,
+                            caption=name,
+                            )
 
 
 def _assign_videos_to_tab() -> st.video:
     vid_types = ['.mp4', '.ogg', '.mov']
     all_videos = {name: vid for name, vid in _return_videos().items() if
                   str(Path(vid).suffix).lower() in vid_types}
-    for name, vid in all_videos.items():
-        with st.container():
-            cols = [col for col in st.columns(len([all_videos.keys()]))]
-            for col in [col for col in cols]:
-                col1, col2 = st.columns([1, 2])
-                col1.markdown(
-                    f"\
-    <h2 style='text-align: left; font-family: {FONT};'>{str(name)}</h2>",
-                    unsafe_allow_html=True,
-                    )
-                col2.video(open(vid, 'rb'))
+    if len(all_videos.keys()) > 0:
+        for name, vid in all_videos.items():
+                col1 = st.columns(1)
+                col1.video(open(vid, 'rb'))
 
 
 def _assign_animations_to_tab() -> None:
@@ -110,25 +108,21 @@ def _assign_animations_to_tab() -> None:
         name: gif for name, gif in _return_animations().items() if
         'gif' in str(Path(gif).suffix).lower()
         }
-    i = 0
-    for name, gif in gif_files.items():
-        with st.container():
-            cols = [col for col in st.columns(len([gif_files.keys()]))]
-            for col in [col for col in cols]:
-                file_ = open(str(gif), "rb")
-                contents = file_.read()
-                data_url = base64.b64encode(contents).decode("utf-8")
-                file_.close()
-                col1, col2 = st.columns(2)
-                col1.markdown(
-                    f"\
-    <h2 style='text-align: left; font-family: {FONT};'>{str(name)}</h2>",
-                    unsafe_allow_html=True,
-                    )
-                col2.markdown(
-                    f'<img src="data:image/gif;base64,{data_url}">',
-                    unsafe_allow_html=True,
-                    )
+    with st.container():
+        for name, gif in gif_files.items():
+            file_ = open(str(gif), "rb")
+            contents = file_.read()
+            data_url = base64.b64encode(contents).decode("utf-8")
+            file_.close()
+            st.markdown(
+                f'''\
+            <figure style="text-align: center">
+            <img src="data:image/gif;base64,{data_url}">
+            <figcaption>{name}</figcaption>
+            </figure>
+            ''',
+                unsafe_allow_html=True,
+            )
 
 
 def _assign_music_to_tab(msc_tab: st.tabs) -> st.audio:
@@ -155,7 +149,6 @@ def _assign_music_to_tab(msc_tab: st.tabs) -> st.audio:
 
 def _portfolio_page_func():
     global FONT
-#    add_bg.add_bg_from_local(str(Path(logo_path, 'Social Outfit Logo.png')))
     st.markdown(
         f"<h1 style='text-align: center; font-family: {FONT}; color:#EDEDED;'>\
         Portfolio</h1>",
@@ -178,16 +171,12 @@ def _portfolio_page_func():
 
 def portfolio_page_main():
     import Contacts
-    hide_streamlit_style = """
-                <style>
-                #MainMenu {visibility: hidden;}
-                footer {visibility: hidden;}
-                </style>
-                """
-    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     logo_path = str(
         Path(PurePath(__file__).parents[1],
-             '.data', 'images', 'Logo', 'Social Outfit Logo.png'
+             '.data', 
+             'images', 
+             'Logo', 
+             'The Social Outfit.png'
              )
         )
     try:
@@ -198,6 +187,13 @@ def portfolio_page_main():
             )
     except st.errors.StreamlitAPIException:
         pass
+    hide_streamlit_style = """
+                <style>
+                #MainMenu {visibility: hidden;}
+                footer {visibility: hidden;}
+                </style>
+                """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     _portfolio_page_func()
     with st.expander('Send Us a Message:'):
         Contacts._email_form_func()

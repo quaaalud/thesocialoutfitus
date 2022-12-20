@@ -44,7 +44,6 @@ def main():
                 footer {visibility: hidden;}
                 </style>
                 """
-    add_bg.add_bg_from_local(city_logo)
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     with st.container():
         with st.container():
