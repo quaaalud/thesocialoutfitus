@@ -17,7 +17,6 @@ FONT1 = 'Papyrus'
 
 @st.cache(suppress_st_warning=True)
 def _return_services_with_display() -> dict:
-    from __get_image_to_display__ import return_image_from_path
     data_path = Path(
         PurePath(__file__).parents[1],
         PurePath('.data/.database/services')
@@ -73,24 +72,18 @@ def _services_page_func() -> None:
 def services_page_main():
     global FONT, FONT1
     import Contacts
-    try:
-        st.set_page_config(
-            layout="wide",
-            page_title='The Social Outfit - Services',
-            page_icon=return_image_from_path(
-                str(
-                    Path(
-                        Path(__file__).parents[1],
-                        '.data',
-                        '.database',
-                        'services',
-                        'Data Analytics & Web App Creation.png'
-                        )
-                    )
-                )
-            )
-    except st.errors.StreamlitAPIException:
-        pass
+    logo_path = str(
+        Path(PurePath(__file__).parents[1],
+             '.data', 'images', 'Logo', 'The Social Outfit.png'
+             )
+    )
+    st.set_page_config(
+        layout='wide',
+        page_title='The Social Outfit - Services',
+        page_icon=return_image_from_path(logo_path),
+        menu_items=None,
+        initial_sidebar_state='collapsed',
+        )
     hide_streamlit_style = """
                 <style>
                 #MainMenu {visibility: hidden;}

@@ -13,10 +13,10 @@ sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
 sys.path.append(str(Path(PurePath(__file__).parents[1], '.data')))
 import __send_message_to_email__ as send_email
 import __get_team_members__ as get_team
-from __get_image_to_display__ import return_image_from_path
+from __get_image_to_display__ import return_image_from_path, _img_to_bytes
 
 
-FONT = 'Ink Free'
+FONT = 'Nanum Gothic'
 FONT1 = 'Papyrus'
 TSO_EMAIL = 'thesocialoutfits@gmail.com'
 
@@ -98,7 +98,9 @@ def _display_current_team_members():
                     unsafe_allow_html=True,
                 )
                 col1.image(return_image_from_path(val),
-                           caption=key)
+                           caption=key,
+                           use_column_width=True,
+                           )
             elif 'dale' in key:
                 col2.markdown(
                     """
@@ -110,7 +112,9 @@ def _display_current_team_members():
                     unsafe_allow_html=True,
                 )
                 col2.image(return_image_from_path(val),
-                           caption=key)
+                           caption=key,
+                           use_column_width=True,
+                           )
             elif 'jack' in key:
                 col3.markdown(
                     """
@@ -122,7 +126,9 @@ def _display_current_team_members():
                     unsafe_allow_html=True,
                 )
                 col3.image(return_image_from_path(val),
-                           caption=key)
+                           caption=key,
+                           use_column_width=True,
+                           )
 
 
 def _email_form_func() -> None:
@@ -165,19 +171,17 @@ def contacts_page_main():
     None.
 
     """
-    logo_path = str(
-        Path(PurePath(__file__).parents[1],
-             '.data', 'images', 'Logo', 'The Social Outfit.png'
-             )
-    )
-    try:
-        st.set_page_config(
-            layout="wide",
-            page_title='The Social Outfit - Contact Us',
-            page_icon=return_image_from_path(logo_path),
+    logo_dir = Path(PurePath(__file__).parents[1],
+                    '.data', 'images', 'Logo'
+                    )
+    logo_path = str(Path(logo_dir, 'The Social Outfit.png'))
+    st.set_page_config(
+        layout='wide',
+        page_title='The Social Outfit - Contact Us',
+        page_icon=return_image_from_path(logo_path),
+        menu_items=None,
+        initial_sidebar_state='collapsed',
         )
-    except st.errors.StreamlitAPIException:
-        pass
     hide_streamlit_style = """
                 <style>
                 #MainMenu {visibility: hidden;}
@@ -187,6 +191,11 @@ def contacts_page_main():
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     global TSO_EMAIL
     global FONT, FONT1
+    main_logo = str(Path(logo_dir, 'Social Outfit Logo All White Slim.png'))
+    col1, col2, col3 = st.columns([2.5, 5, 2.5])
+    col2.image(return_image_from_path(main_logo),
+               use_column_width=True,
+               )
     st.header('Contact Us')
     st.subheader(f'Send us an email directly: {TSO_EMAIL}')
     _email_form_func()

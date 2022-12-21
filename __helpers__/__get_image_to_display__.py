@@ -5,7 +5,9 @@ Created on Sun Nov  20 05:22:42 2022
 @author: dludwinski
 """
 
+import base64
 from PIL import Image
+from pathlib import Path
 
 
 def return_image_from_path(file_path: str) -> Image:
@@ -23,6 +25,12 @@ def return_image_from_path(file_path: str) -> Image:
 
     """
     return Image.open(file_path)
+
+
+def _img_to_bytes(img_path):
+    img_bytes = Path(img_path).read_bytes()
+    encoded = base64.b64encode(img_bytes).decode()
+    return encoded
 
 
 if __name__ == '__main__':

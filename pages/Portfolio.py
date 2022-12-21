@@ -140,8 +140,13 @@ def _assign_music_to_tab(msc_tab: st.tabs) -> st.audio:
             if str(file_path.suffix) in file_types_dict.keys():
                 with msc_tab:
                     st.markdown(
-                        f"\
-        <h2 style='text-align: left; font-family: {FONT};'>{str(song_name)}</h2>",
+                        f"""
+                        <h2
+                        style='text-align: left;
+                        font-family: {FONT};'>
+                        {str(song_name)}
+                        </h2>
+                        """,
                         unsafe_allow_html=True,
                         )
                     st.audio(
@@ -153,13 +158,13 @@ def _assign_music_to_tab(msc_tab: st.tabs) -> st.audio:
 def _portfolio_page_func():
     global FONT
     st.markdown(
-        f"<h1 style='text-align: center; font-family: {FONT};'>\
-        Portfolio</h1>",
+        f"""<h1 style='text-align: center; font-family: {FONT};'>
+        Portfolio</h1>""",
         unsafe_allow_html=True
         )
     st.markdown(
-        f"<h2 style='text-align: left; font-family: {FONT};'>\
-        Recent Projects</h1>",
+        f"""<h2 style='text-align: left; font-family: {FONT};'>
+        Recent Projects</h1>""",
         unsafe_allow_html=True
         )
     img_tab, vdo_tab, msc_tab = st.tabs([
@@ -176,20 +181,16 @@ def portfolio_page_main():
     import Contacts
     logo_path = str(
         Path(PurePath(__file__).parents[1],
-             '.data',
-             'images',
-             'Logo',
-             'The Social Outfit.png'
+             '.data', 'images', 'Logo', 'The Social Outfit.png'
              )
+    )
+    st.set_page_config(
+        layout='wide',
+        page_title='The Social Outfit - Contact Us',
+        page_icon=return_image_from_path(logo_path),
+        menu_items=None,
+        initial_sidebar_state='collapsed',
         )
-    try:
-        st.set_page_config(
-            layout="wide",
-            page_title='The Social Outfit - Portfolio',
-            page_icon=return_image_from_path(logo_path),
-            )
-    except st.errors.StreamlitAPIException:
-        pass
     hide_streamlit_style = """
                 <style>
                 #MainMenu {visibility: hidden;}
