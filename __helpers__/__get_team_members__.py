@@ -12,7 +12,7 @@ def _get_team_images(team_img_dir=TEAM_IMG_DIR) -> dict:
                    if _file.is_file()
                    ]
         sorted_dirs = sorted(dirlist, key=lambda t: t.lstat().st_mtime)
-        file_names = [_file.name.split('.')[0] for _file in sorted_dirs]
+        file_names = [str(Path(_file.name).stem) for _file in sorted_dirs]
         team_dict = dict(zip(file_names, sorted_dirs))
         return team_dict
     except FileNotFoundError:

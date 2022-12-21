@@ -87,16 +87,42 @@ def _display_current_team_members():
     with st.container():
         col1, col2, col3 = st.columns(3)
         for key, val in team_dict.items():
-            if 'Aaron' in key:
+            if 'aaron' in key:
+                col1.markdown(
+                    """
+                    <p style='text-align: center'>
+                    <u>Aaron Childs</u><br>
+                    <small>Founder & Creative Director
+                    </small></p>
+                    """,
+                    unsafe_allow_html=True,
+                )
                 col1.image(return_image_from_path(val),
                            caption=key)
-            elif 'Dale' in key:
+            elif 'dale' in key:
+                col2.markdown(
+                    """
+                    <p style='text-align: center'>
+                    <u>Dale Ludwinski</u><br>
+                    <small>Operations & Analytics
+                    </small></p>
+                    """,
+                    unsafe_allow_html=True,
+                )
                 col2.image(return_image_from_path(val),
                            caption=key)
-            elif 'Jack' in key:
+            elif 'jack' in key:
+                col3.markdown(
+                    """
+                    <p style='text-align: center'>
+                    <u>Jack Trippi</u><br>
+                    <small>Recruitment & Brand Coordinator
+                    </small></p>
+                    """,
+                    unsafe_allow_html=True,
+                )
                 col3.image(return_image_from_path(val),
                            caption=key)
-
 
 
 def _email_form_func() -> None:
@@ -143,7 +169,7 @@ def contacts_page_main():
         Path(PurePath(__file__).parents[1],
              '.data', 'images', 'Logo', 'The Social Outfit.png'
              )
-        )
+    )
     try:
         st.set_page_config(
             layout="wide",
@@ -163,7 +189,6 @@ def contacts_page_main():
     global FONT, FONT1
     st.header('Contact Us')
     st.subheader(f'Send us an email directly: {TSO_EMAIL}')
-    st.write('Message us today to get the help you have been looking for!')
     _email_form_func()
     _display_current_team_members()
 
