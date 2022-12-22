@@ -188,8 +188,8 @@ def contacts_page_main():
                 </style>
                 """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-    global TSO_EMAIL
     global FONT, FONT1
+    TSO_EMAIL = 'thesocialoutfitus@gmail.com'
     main_logo = str(Path(logo_dir, 'Social Outfit Logo All White Slim.png'))
     col1, col2, col3 = st.columns([2.5, 5, 2.5])
     col2.image(return_image_from_path(main_logo),

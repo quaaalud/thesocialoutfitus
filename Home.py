@@ -16,7 +16,7 @@ sys.path.append(str(Path(PurePath(__file__).parent, 'pages')))
 sys.path.append(str(Path(PurePath(__file__).parent, '__helpers__')))
 
 from __get_image_to_display__ import return_image_from_path
-from  __return_cenntered_email_address__ import _return_centered_email
+from  __return_centered_email_address__ import _return_centered_email
 
 FONT = 'Nanum Gothic'
 FONT1 = 'Papyrus'
