@@ -13,13 +13,12 @@ sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
 sys.path.append(str(Path(PurePath(__file__).parents[1], '.data')))
 import __send_message_to_email__ as send_email
 import __get_team_members__ as get_team
-from __get_image_to_display__ import return_image_from_path, _img_to_bytes
+from __get_image_to_display__ import return_image_from_path
 
 
 FONT = 'Nanum Gothic'
 FONT1 = 'Papyrus'
-TSO_EMAIL = 'thesocialoutfits@gmail.com'
-
+        
 
 def get_contact_info(name: str,
                      email: str,

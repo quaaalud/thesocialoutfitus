@@ -10,6 +10,7 @@ from pathlib import Path, PurePath
 import sys
 sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
 from __get_image_to_display__ import return_image_from_path
+from  __return_centered_email_address__ import _return_centered_email
 
 FONT = 'Nanum Gothic'
 FONT1 = 'Papyrus'
@@ -94,6 +95,8 @@ def services_page_main():
     _services_page_func()
     with st.expander('Send Us a Message:'):
         Contacts._email_form_func()
+    with st.container():
+        _return_centered_email()
 
 
 if __name__ == '__main__':

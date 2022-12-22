@@ -16,6 +16,7 @@ sys.path.append(str(Path(PurePath(__file__).parent, 'pages')))
 sys.path.append(str(Path(PurePath(__file__).parent, '__helpers__')))
 
 from __get_image_to_display__ import return_image_from_path
+from  __return_cenntered_email_address__ import _return_centered_email
 
 FONT = 'Nanum Gothic'
 FONT1 = 'Papyrus'
@@ -74,20 +75,7 @@ def main():
     with st.container():
         Services._services_page_func()
     with st.container():
-        empty1, col, empty2 = st.columns([1, 5, 1])
-        col.markdown(
-            f"""
-            <h3 style='text-align:center'>
-            Send us an email today:
-            <a href="mailto:thesocialoutfitus@gmail.com"
-            target="_blank"
-            rel="noopener noreferrer">
-            {Contacts.TSO_EMAIL}
-            </a>
-            </h3>
-            """,
-            unsafe_allow_html=True,
-            )
+        _return_centered_email()
     with st.container():
         empty1, col, empty2 = st.columns([0.5, 2, 0.5])
         empty1.empty()
