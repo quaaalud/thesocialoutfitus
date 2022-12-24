@@ -27,6 +27,25 @@ def return_image_from_path(file_path: str) -> Image:
     return Image.open(file_path)
 
 
+def return_image_from_path_and_resize_small(file_path: str) -> Image:
+    """
+    Take file path and returns PIL.Image for use in Streamlit App.
+
+    Parameters
+    ----------
+    file_path : str
+
+    Returns
+    -------
+    Image
+        PIL.Image
+
+    """
+    img = Image.open(file_path)
+    img = img.resize((75, 75))
+    return img
+
+
 def return_image_from_path_and_resize(file_path: str) -> Image:
     """
     Take file path and returns PIL.Image for use in Streamlit App.
