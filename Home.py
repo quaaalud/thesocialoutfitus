@@ -17,6 +17,7 @@ sys.path.append(str(Path(PurePath(__file__).parent, '__helpers__')))
 
 from __get_image_to_display__ import return_image_from_path
 from  __return_centered_email_address__ import _return_centered_email
+from __sm_links__ import _display_sm_links
 
 FONT = 'Nanum Gothic'
 FONT1 = 'Papyrus'
@@ -58,29 +59,26 @@ def main():
                 width=500,
                 use_column_width='auto')
             col3.empty()
-    st.write(' ')
-    st.write(' ')
-    st.write(' ')
-    st.write(' ')
-#    st.markdown(
-#        f"<h1 style='text-align: center; font-family: {FONT};'> \
-#        Welcome to The Social Outfit</h1>",
-#        unsafe_allow_html=True
-#        )
-
+    break_line = '<p> <br></p>'
     with st.expander('Contact Us Today'):
         Contacts._email_form_func()
+    st.markdown(break_line, unsafe_allow_html=True)
     with st.container():
         Portfolio._portfolio_page_func()
+    st.markdown(break_line, unsafe_allow_html=True)
     with st.container():
         Services._services_page_func()
+    st.markdown(break_line, unsafe_allow_html=True)
     with st.container():
         _return_centered_email()
+    st.markdown(break_line, unsafe_allow_html=True)
     with st.container():
         empty1, col, empty2 = st.columns([0.5, 2, 0.5])
         empty1.empty()
         Contacts._display_current_team_members()
         empty2.empty()
+    with st.container():
+        _display_sm_links()
 
 
 if __name__ == '__main__':

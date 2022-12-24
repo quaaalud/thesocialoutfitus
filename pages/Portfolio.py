@@ -11,6 +11,7 @@ from pathlib import Path, PurePath
 import sys
 sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
 from  __return_centered_email_address__ import _return_centered_email
+from __sm_links__ import _display_sm_links
 from __get_image_to_display__ import (
     return_image_from_path, 
     return_image_from_path_and_resize_medium
@@ -208,6 +209,8 @@ def portfolio_page_main():
         Contacts._email_form_func()
     with st.container():
         _return_centered_email()
+    with st.container():
+        _display_sm_links()
 
 
 if __name__ == '__main__':

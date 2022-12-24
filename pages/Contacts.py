@@ -17,7 +17,7 @@ from __get_image_to_display__ import (
     return_image_from_path,
     return_image_from_path_and_resize_large,
     )
-
+from __sm_links__ import _display_sm_links
 
 FONT = 'Nanum Gothic'
 FONT1 = 'Papyrus'
@@ -205,6 +205,8 @@ def contacts_page_main():
     st.subheader(f'Send us an email directly: {TSO_EMAIL}')
     _email_form_func()
     _display_current_team_members()
+    with st.container():
+        _display_sm_links()
 
 
 if __name__ == '__main__':

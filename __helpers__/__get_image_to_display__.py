@@ -42,7 +42,7 @@ def return_image_from_path_and_resize_small(file_path: str) -> Image:
 
     """
     img = Image.open(file_path)
-    img = img.resize((75, 75))
+    img = img.resize((25, 25))
     return img
 
 
