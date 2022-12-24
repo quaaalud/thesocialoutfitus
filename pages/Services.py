@@ -9,8 +9,11 @@ import streamlit as st
 from pathlib import Path, PurePath
 import sys
 sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
-from __get_image_to_display__ import return_image_from_path
 from  __return_centered_email_address__ import _return_centered_email
+from __get_image_to_display__ import (
+    return_image_from_path,
+    return_image_from_path_and_resize_medium
+    )
 
 FONT = 'Nanum Gothic'
 FONT1 = 'Papyrus'
@@ -39,16 +42,16 @@ def _return_services_with_display() -> dict:
         'Data Analytics & Web App Creation.png'
         )
     return {
-        str(brand_logo.name): return_image_from_path(
+        str(brand_logo.name): return_image_from_path_and_resize_medium(
             brand_logo
             ),
-        str(se_display.name): return_image_from_path(
+        str(se_display.name): return_image_from_path_and_resize_medium(
             se_display
             ),
-        str(logo_display.name): return_image_from_path(
+        str(logo_display.name): return_image_from_path_and_resize_medium(
             logo_display
             ),
-        str(wa_display.name): return_image_from_path(
+        str(wa_display.name): return_image_from_path_and_resize_medium(
             wa_display
             ),
     }

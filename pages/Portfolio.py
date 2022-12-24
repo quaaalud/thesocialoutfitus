@@ -10,8 +10,11 @@ import base64
 from pathlib import Path, PurePath
 import sys
 sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
-from __get_image_to_display__ import return_image_from_path
 from  __return_centered_email_address__ import _return_centered_email
+from __get_image_to_display__ import (
+    return_image_from_path, 
+    return_image_from_path_and_resize_medium
+    )
 
 
 FONT = 'Nanum Gothic'
@@ -82,17 +85,17 @@ def _assign_images_to_tab(img_tab: st.tabs) -> st.image:
         col1, col2 = st.columns(2)
         with st.container():
             for i, (name, img) in enumerate(img_dict.items()):
-                if i < 10:
+                if i < 8:
                     if (i % 2) == 0:
                         col1.image(
-                            return_image_from_path(img),
-                            use_column_width=True,
+                            return_image_from_path_and_resize_medium(img),
+                            use_column_width='always',
                             caption=name,
                             )
                     else:
                         col2.image(
-                            return_image_from_path(img),
-                            use_column_width=True,
+                            return_image_from_path_and_resize_medium(img),
+                            use_column_width='always',
                             caption=name,
                             )
 

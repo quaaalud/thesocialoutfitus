@@ -11,7 +11,7 @@ def _get_team_images(team_img_dir=TEAM_IMG_DIR) -> dict:
         dirlist = [_file for _file in team_img_dir.iterdir()
                    if _file.is_file()
                    ]
-        sorted_dirs = sorted(dirlist, key=lambda t: t.lstat().st_mtime)
+        sorted_dirs = sorted(dirlist, key=lambda t: len(str(t)))
         file_names = [str(Path(_file.name).stem) for _file in sorted_dirs]
         team_dict = dict(zip(file_names, sorted_dirs))
         return team_dict

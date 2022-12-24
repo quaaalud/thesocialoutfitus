@@ -13,7 +13,10 @@ sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
 sys.path.append(str(Path(PurePath(__file__).parents[1], '.data')))
 import __send_message_to_email__ as send_email
 import __get_team_members__ as get_team
-from __get_image_to_display__ import return_image_from_path
+from __get_image_to_display__ import (
+    return_image_from_path,
+    return_image_from_path_and_resize_large,
+    )
 
 
 FONT = 'Nanum Gothic'
@@ -84,50 +87,53 @@ def _get_current_team_members():
 def _display_current_team_members():
     team_dict = _get_current_team_members()
     with st.container():
-        col1, col2, col3 = st.columns(3)
-        for key, val in team_dict.items():
-            if 'aaron' in key:
-                col1.markdown(
-                    """
-                    <p style='text-align: center'>
-                    <u>Aaron Childs</u><br>
-                    <small>Founder & Creative Director
-                    </small></p>
-                    """,
-                    unsafe_allow_html=True,
-                )
-                col1.image(return_image_from_path(val),
-                           caption=key,
-                           use_column_width=True,
-                           )
-            elif 'dale' in key:
-                col2.markdown(
-                    """
-                    <p style='text-align: center'>
-                    <u>Dale Ludwinski</u><br>
-                    <small>Operations & Analytics
-                    </small></p>
-                    """,
-                    unsafe_allow_html=True,
-                )
-                col2.image(return_image_from_path(val),
-                           caption=key,
-                           use_column_width=True,
-                           )
-            elif 'jack' in key:
-                col3.markdown(
-                    """
+        col1, col2, col3 = st.columns(3, gap='small')
+        col1.markdown(
+            """
+            <p style='text-align: center'>
+            <u>Dale Ludwinski</u><br>
+            <small>Operations & Analytics
+            </small></p>
+            """,
+            unsafe_allow_html=True,
+        )
+        col2.markdown(
+            """
+            <p style='text-align: center'>
+            <u>Aaron Childs</u><br>
+            <small>Founder & Creative Director
+            </small></p>
+            """,
+            unsafe_allow_html=True,
+        )
+        col3.markdown(
+            """
                     <p style='text-align: center'>
                     <u>Jack Trippi</u><br>
                     <small>Recruitment & Brand Coordinator
                     </small></p>
                     """,
-                    unsafe_allow_html=True,
-                )
-                col3.image(return_image_from_path(val),
-                           caption=key,
-                           use_column_width=True,
-                           )
+            unsafe_allow_html=True,
+        )
+        for key, val in team_dict.items():
+            if 'dale' in str(key).lower():
+                with st.container():
+                    col1.image(return_image_from_path_and_resize_large(val),
+                               caption=key,
+                               use_column_width='always',
+                               )
+            elif 'aaron' in str(key).lower():
+                with st.container():
+                    col2.image(return_image_from_path_and_resize_large(val),
+                               caption=key,
+                               use_column_width='always',
+                               )
+            elif 'jack' in str(key).lower():
+                with st.container():
+                    col3.image(return_image_from_path_and_resize_large(val),
+                               caption=key,
+                               use_column_width='always',
+                               )
 
 
 def _email_form_func() -> None:
@@ -146,7 +152,7 @@ def _email_form_func() -> None:
     if message_info:
         if st.button('Submit'):
             send_email.capture_and_send_email(
-                dest=TSO_EMAIL,
+                dest='thesocialoutfitus@gmail.com',
                 subject=email,
                 body=_concat_all_dict_values(message_info),
                 )
