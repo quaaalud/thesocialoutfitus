@@ -93,12 +93,13 @@ def services_page_main():
     hide_streamlit_style = """
                 <style>
                 #MainMenu {visibility: hidden;}
-                div.block-container {padding-top:1rem; padding-bottom:1rem;}
+                div.block-container {padding-top:1rem; padding-bottom:0rem;}
                 footer {visibility: hidden;}
                 </style>
                 """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     _services_page_func()
+    st.markdown('<p><br></p>', unsafe_allow_html=True)
     with st.expander('Send Us a Message:'):
         Contacts._email_form_func()
     with st.container():

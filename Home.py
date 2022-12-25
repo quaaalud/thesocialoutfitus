@@ -46,7 +46,7 @@ def main():
     hide_streamlit_style = """
                 <style>
                 #MainMenu {visibility: hidden;}
-                div.block-container {padding-top:1rem; padding-bottom:1rem;}
+                div.block-container {padding-top:1rem; padding-bottom:0rem;}
                 footer {visibility: hidden;}
                 </style>
                 """
@@ -68,8 +68,10 @@ def main():
     with st.container():
         Portfolio._portfolio_page_func()
     st.markdown(break_line, unsafe_allow_html=True)
+    st.markdown(break_line, unsafe_allow_html=True)
     with st.container():
         Services._services_page_func()
+    st.markdown(break_line, unsafe_allow_html=True)
     st.markdown(break_line, unsafe_allow_html=True)
     with st.container():
         _return_centered_email()

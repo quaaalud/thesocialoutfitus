@@ -191,7 +191,7 @@ def contacts_page_main():
     hide_streamlit_style = """
                 <style>
                 #MainMenu {visibility: hidden;}
-                div.block-container {padding-top:1rem; padding-bottom:1rem;}
+                div.block-container {padding-top:1rem; padding-bottom:0rem;}
                 footer {visibility: hidden;}
                 </style>
                 """
@@ -206,6 +206,7 @@ def contacts_page_main():
     st.header('Contact Us')
     st.subheader(f'Send us an email directly: {TSO_EMAIL}')
     _email_form_func()
+    st.markdown('<p><br></p>', unsafe_allow_html=True)
     _display_current_team_members()
     with st.container():
         _display_sm_links()
