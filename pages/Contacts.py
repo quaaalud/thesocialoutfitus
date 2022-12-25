@@ -13,11 +13,12 @@ sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
 sys.path.append(str(Path(PurePath(__file__).parents[1], '.data')))
 import __send_message_to_email__ as send_email
 import __get_team_members__ as get_team
+from __sm_links__ import _display_sm_links
+from __add_pages_links__ import _display_pages_links
 from __get_image_to_display__ import (
     return_image_from_path,
     return_image_from_path_and_resize_large,
     )
-from __sm_links__ import _display_sm_links
 
 FONT = 'Nanum Gothic'
 FONT1 = 'Papyrus'
@@ -190,6 +191,7 @@ def contacts_page_main():
     hide_streamlit_style = """
                 <style>
                 #MainMenu {visibility: hidden;}
+                div.block-container {padding-top:1rem; padding-bottom:1rem;}
                 footer {visibility: hidden;}
                 </style>
                 """
@@ -207,6 +209,8 @@ def contacts_page_main():
     _display_current_team_members()
     with st.container():
         _display_sm_links()
+    with st.container():
+        _display_pages_links()
 
 
 if __name__ == '__main__':

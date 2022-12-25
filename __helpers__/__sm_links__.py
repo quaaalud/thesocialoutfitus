@@ -65,15 +65,7 @@ def sm_logo_link_to_html(web_path: str,
 
 def _display_sm_links() -> None:
     logo_link_dict = _get_sm_logo_and_link()
-    st.markdown('<br><p> </p><br>', unsafe_allow_html=True)
-    with st.container():
-        visit_txt = """
-        <p style='text-align:center; color:gray;'>
-        <small>
-        Vist our social media pages and connect with us today
-        </small>
-        </p>"""
-        st.markdown(visit_txt, unsafe_allow_html=True)
+    st.markdown('<br><p> </p>', unsafe_allow_html=True)
     em1, col1, em2, col2, em3, col3, em4 = st.columns(
         [3, 0.5, 0.1, 0.5, 0.1, 0.5, 3],
         gap='small',
@@ -91,6 +83,12 @@ def _display_sm_links() -> None:
             col3.markdown(sm_logo_link_to_html(sm_link, sm_logo),
                           unsafe_allow_html=True,
                           )
+    with st.container():
+        visit_txt = """
+        <p style='text-align:center; color:gray;'>
+        <b>Vist our social media pages and connect with us today</b>
+        </p>"""
+        st.markdown(visit_txt, unsafe_allow_html=True)
             
             
 if __name__ == '__main__':

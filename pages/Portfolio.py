@@ -12,6 +12,7 @@ import sys
 sys.path.append(str(Path(PurePath(__file__).parents[1], '__helpers__')))
 from  __return_centered_email_address__ import _return_centered_email
 from __sm_links__ import _display_sm_links
+from __add_pages_links__ import _display_pages_links
 from __get_image_to_display__ import (
     return_image_from_path, 
     return_image_from_path_and_resize_medium
@@ -200,6 +201,7 @@ def portfolio_page_main():
     hide_streamlit_style = """
                 <style>
                 #MainMenu {visibility: hidden;}
+                div.block-container {padding-top:1rem; padding-bottom:1rem;}
                 footer {visibility: hidden;}
                 </style>
                 """
@@ -211,6 +213,8 @@ def portfolio_page_main():
         _return_centered_email()
     with st.container():
         _display_sm_links()
+    with st.container():
+        _display_pages_links()
 
 
 if __name__ == '__main__':
