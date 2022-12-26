@@ -1,8 +1,8 @@
 FROM python:3.11
 
-EXPOSE 8501
-
-WORKDIR /thesocialoutfitus
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 RUN apt-get update && apt-get install -y \
     build-essential \
@@ -10,7 +10,12 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/quaaalud/thesocialoutfitus.git .
+COPY thesocialoutfitus/ thesocialoutfitus/
+COPY .env .
+
+EXPOSE 8501
+
+WORKDIR /thesocialoutfitus
 
 RUN pip3 install -r requirements.txt
 
