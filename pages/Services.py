@@ -98,6 +98,17 @@ def services_page_main():
                 </style>
                 """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+    main_logo = str(
+        Path(Path(__file__).parents[1],
+             '.data',
+             'images',
+             'Logo',
+             'Social Outfit Logo All White Slim.png')
+        )
+    col1, col2, col3 = st.columns([2.5, 5, 2.5])
+    col2.image(return_image_from_path(main_logo),
+               use_column_width=True,
+               )
     _services_page_func()
     st.markdown('<p><br></p>', unsafe_allow_html=True)
     with st.expander('Send Us a Message:'):
