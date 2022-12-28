@@ -98,6 +98,16 @@ def services_page_main():
                 </style>
                 """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+    _services_page_func()
+    st.markdown('<p><br></p>', unsafe_allow_html=True)
+    with st.expander('Send Us a Message:'):
+        Contacts._email_form_func()
+    with st.container():
+        _return_centered_email()
+    with st.container():
+        _display_sm_links()
+    with st.container():
+        _display_pages_links()
     main_logo = str(
         Path(Path(__file__).parents[1],
              '.data',
@@ -109,16 +119,6 @@ def services_page_main():
     col2.image(return_image_from_path(main_logo),
                use_column_width=True,
                )
-    _services_page_func()
-    st.markdown('<p><br></p>', unsafe_allow_html=True)
-    with st.expander('Send Us a Message:'):
-        Contacts._email_form_func()
-    with st.container():
-        _return_centered_email()
-    with st.container():
-        _display_sm_links()
-    with st.container():
-        _display_pages_links()
 
 
 if __name__ == '__main__':

@@ -68,6 +68,7 @@ def main():
                 use_column_width='auto')
             col3.empty()
     break_line = '<p> <br></p>'
+    empty1 = st.empty()
     with st.expander('Contact Us Today'):
         Contacts._email_form_func()
     st.markdown(break_line, unsafe_allow_html=True)
