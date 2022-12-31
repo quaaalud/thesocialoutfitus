@@ -79,11 +79,19 @@ def main():
     with st.container():
         _return_centered_email()
     st.markdown(break_line, unsafe_allow_html=True)
-    with st.container():
-        empty1, col, empty2 = st.columns([0.5, 2, 0.5])
-        empty1.empty()
-        Contacts._display_current_team_members()
-        empty2.empty()
+    page_break = str(
+        Path(IMG_PATH, 'page-break.png')
+        )
+    with empty1:
+        with st.container():
+            col1, col2, col3 = st.columns([3, 1, 3])
+            col1.empty()
+            col2.image(return_image_from_path(
+                str(page_break)
+                ),
+                width=500,
+                use_column_width='auto')
+            col3.empty()
     with st.container():
         _display_sm_links()
     with st.container():
