@@ -73,10 +73,6 @@ def main():
         Contacts._email_form_func()
     st.markdown(break_line, unsafe_allow_html=True)
     with st.container():
-        Portfolio._portfolio_page_func()
-    st.markdown(break_line, unsafe_allow_html=True)
-    st.markdown(break_line, unsafe_allow_html=True)
-    with st.container():
         Services._services_page_func()
     st.markdown(break_line, unsafe_allow_html=True)
     st.markdown(break_line, unsafe_allow_html=True)

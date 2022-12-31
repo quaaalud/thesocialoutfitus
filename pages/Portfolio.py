@@ -165,11 +165,6 @@ def _assign_music_to_tab(msc_tab: st.tabs) -> st.audio:
 def _portfolio_page_func():
     global FONT
     st.markdown(
-        f"""<h1 style='text-align: center; font-family: {FONT};'>
-        Portfolio</h1>""",
-        unsafe_allow_html=True
-        )
-    st.markdown(
         f"""<h2 style='text-align: left; font-family: {FONT};'>
         Recent Projects</h1>""",
         unsafe_allow_html=True
@@ -191,6 +186,11 @@ def portfolio_page_main():
              '.data', 'images', 'Logo', 'The Social Outfit.png'
              )
     )
+    IMG_PATH = str(
+        Path(PurePath(__file__).parents[1],
+             '.data', '.database', 'bg_images', 
+             )
+    )
     st.set_page_config(
         layout='wide',
         page_title='The Social Outfit - Contact Us',
@@ -206,6 +206,19 @@ def portfolio_page_main():
                 </style>
                 """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+    page_head = str(
+        Path(IMG_PATH, 'portfolio-header.png')
+        )
+    with st.container():
+        with st.container():
+            col1, col2, col3 = st.columns([1, 3, 1])
+            col1.empty()
+            col2.image(return_image_from_path(
+                str(page_head)
+                ),
+                width=500,
+                use_column_width='auto')
+            col3.empty()
     _portfolio_page_func()
     st.markdown('<p><br></p>', unsafe_allow_html=True)
     with st.expander('Send Us a Message:'):
