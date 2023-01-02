@@ -58,7 +58,7 @@ def _display_pages_links():
             col3.markdown(page, unsafe_allow_html=True)
     st.markdown("""
                 <p style='text-align:center; color:gray;'> <br><br>
-                © 2022 All Rights Reserved
+                © 2023 All Rights Reserved
                 </p>
                 """, 
                 unsafe_allow_html=True
