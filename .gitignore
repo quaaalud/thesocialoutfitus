@@ -134,6 +134,7 @@ env.bak/
 venv.bak/
 credentials.*
 token.*
+*.pem
 
 # Spyder project settings
 .spyderproject
