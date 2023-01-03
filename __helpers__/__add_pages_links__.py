@@ -8,7 +8,7 @@ sys.path.append(str(Path(__file__).parent))
 
 import streamlit as st
 
-HOME_PAGE = 'http://localhost:8501'
+HOME_PAGE = 'http://thesocialoutfitus.com'
 
 # @st.cache(allow_output_mutation=True)
 def _list_all_pages() -> dict:
