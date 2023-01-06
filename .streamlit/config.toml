@@ -41,7 +41,7 @@ displayEnabled = true
 # Controls whether uncaught app exceptions are displayed in the browser. By default, this is set to True and Streamlit displays app exceptions and associated tracebacks in the browser.
 # If set to False, an exception will result in a generic message being shown in the browser, and exceptions and tracebacks will be printed to the console only.
 # Default: true
-showErrorDetails = true
+showErrorDetails = false
 
 
 [runner]
@@ -60,7 +60,7 @@ fixMatplotlib = true
 
 # Run the Python Garbage Collector after each script execution. This can help avoid excess memory use in Streamlit apps, but could introduce delay in rerunning the app script for high-memory-use applications.
 # Default: true
-postScriptGC = true
+postScriptGC = false
 
 # Handle script rerun requests immediately, rather than waiting for script execution to reach a yield point. Enabling this will make Streamlit much more responsive to user interaction, but it can lead to race conditions in apps that mutate session_state data outside of explicit session_state assignment statements.
 # Default: false
@@ -90,7 +90,7 @@ headless = true
 
 # Automatically rerun script when the file is modified on disk.
 # Default: false
-runOnSave = false
+runOnSave = true
 
 # The address where the server will listen for client and browser connections. Use this if you want to bind the server to a specific address. If set, the server will only be accessible from this address, and not from any aliases (like localhost).
 # Default: (unset)
@@ -116,7 +116,7 @@ enableXsrfProtection = false
 
 # Max size, in megabytes, for files uploaded with the file_uploader.
 # Default: 200
-maxUploadSize = 200
+maxUploadSize = 800
 
 # Max size, in megabytes, of messages that can be sent via the WebSocket connection.
 # Default: 200
@@ -124,7 +124,7 @@ maxMessageSize = 200
 
 # Enables support for websocket compression.
 # Default: false
-enableWebsocketCompression = true
+enableWebsocketCompression = false
 
 
 [browser]
