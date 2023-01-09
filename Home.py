@@ -19,7 +19,7 @@ from __get_image_to_display__ import return_image_from_path
 from  __return_centered_email_address__ import _return_centered_email
 from __sm_links__ import _display_sm_links
 from __add_pages_links__ import _display_pages_links
-from __add_background_from_local__ import add_bg_from_local
+from __get_header_gif__ import _return_gif_html
 
 FONT = 'Nanum Gothic'
 FONT1 = 'Papyrus'
@@ -41,9 +41,6 @@ def main():
     import Contacts
     import Portfolio
     import Services
-    home_bg_img_path = str(
-        Path(DATA_PATH, '.database', 'bg_images', 'Customer Retention.jpg')
-        )
     # Hide mainmenu and footer
     hide_streamlit_style = """
                 <style>
@@ -53,20 +50,18 @@ def main():
                 </style>
                 """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-#    add_bg_from_local(home_bg_img_path)
     white_logo = str(
         Path(IMG_PATH, 'Logo', 'Social Outfit Logo All White Slim.png')
         )
     empty1 = st.empty()
     with st.container():
         with st.container():
-            col1, col2, col3 = st.columns([1, 3, 1])
+            col1, col2, col3 = st.columns([2, 5, 2])
             col1.empty()
-            col2.image(return_image_from_path(
-                str(white_logo)
-                ),
-                width=500,
-                use_column_width='auto')
+            col2.image(
+                return_image_from_path(white_logo),
+                use_column_width=True,
+                )
             col3.empty()
     break_line = '<p> <br></p>'
     

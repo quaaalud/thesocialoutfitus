@@ -28,7 +28,7 @@ def _get_all_sm_logos() -> list:
 def _return_sm_links_dict() -> dict:
     return {
         'Facebook': 'https://www.facebook.com/thesocialoutfitus',
-        'Instagram': 'https://www.instagram.com/socialoutfitus',
+        'Instagram': 'https://www.instagram.com/thesocialoutfitus',
         'Twitter': 'https://twitter.com/socialoutfitUS',
     }
 

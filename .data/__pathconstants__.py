@@ -28,6 +28,7 @@ class __PATHS__:
         self.images = PurePath(self._DATA_DIR, 'images')
         self.music = PurePath(self._DATA_DIR, 'music')
         self.videos = PurePath(self._DATA_DIR, 'videos')
+        self.websites_apps = PurePath(self._DATA_DIR, 'websites_apps')
 
     def _paths_dict(self):
         return self.__dict__

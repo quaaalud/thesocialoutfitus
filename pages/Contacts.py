@@ -15,9 +15,10 @@ import __send_message_to_email__ as send_email
 import __get_team_members__ as get_team
 from __sm_links__ import _display_sm_links
 from __add_pages_links__ import _display_pages_links
+from __get_header_gif__ import _return_gif_html
 from __get_image_to_display__ import (
     return_image_from_path,
-    return_image_from_path_and_resize_large,
+    return_image_from_path_and_resize_medium,
     )
 
 FONT = 'Nanum Gothic'
@@ -110,7 +111,7 @@ def _display_current_team_members():
         col3.markdown(
             """
                     <p style='text-align: center'>
-                    <u>Jack Trippi</u><br>
+                    <u>Jack Tripi</u><br>
                     <small>Recruitment & Brand Coordinator
                     </small></p>
                     """,
@@ -119,19 +120,19 @@ def _display_current_team_members():
         for key, val in team_dict.items():
             if 'dale' in str(key).lower():
                 with st.container():
-                    col1.image(return_image_from_path_and_resize_large(val),
+                    col1.image(return_image_from_path_and_resize_medium(val),
                                caption=key,
                                use_column_width='always',
                                )
             elif 'aaron' in str(key).lower():
                 with st.container():
-                    col2.image(return_image_from_path_and_resize_large(val),
+                    col2.image(return_image_from_path_and_resize_medium(val),
                                caption=key,
                                use_column_width='always',
                                )
             elif 'jack' in str(key).lower():
                 with st.container():
-                    col3.image(return_image_from_path_and_resize_large(val),
+                    col3.image(return_image_from_path_and_resize_medium(val),
                                caption=key,
                                use_column_width='always',
                                )
@@ -177,9 +178,8 @@ def contacts_page_main():
     None.
 
     """
-    logo_dir = Path(PurePath(__file__).parents[1],
-                    '.data', 'images', 'Logo'
-                    )
+    DATA_PATH = Path(PurePath(__file__).parents[1],'.data')
+    logo_dir = Path(DATA_PATH, 'images', 'Logo')
     logo_path = str(Path(logo_dir, 'The Social Outfit.png'))
     st.set_page_config(
         layout='wide',
@@ -198,20 +198,30 @@ def contacts_page_main():
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     global FONT, FONT1
     TSO_EMAIL = 'thesocialoutfitus@gmail.com'
-    main_logo = str(Path(logo_dir, 'Social Outfit Logo All White Slim.png'))
-    col1, col2, col3 = st.columns([2.5, 5, 2.5])
-    col2.image(return_image_from_path(main_logo),
+    contacts_header = str(
+        Path(DATA_PATH, 
+             '.database', 
+             'bg_images', 
+             'contact-us-header.png'
+             )
+        )
+    col1, col2, col3 = st.columns([2, 3, 2])
+    col2.image(return_image_from_path(contacts_header),
                use_column_width=True,
                )
-    st.header('Contact Us')
-    st.subheader(f'Send us an email directly: {TSO_EMAIL}')
     _email_form_func()
+    st.subheader(f'Send us an email directly: {TSO_EMAIL}')
     st.markdown('<p><br></p>', unsafe_allow_html=True)
     _display_current_team_members()
     with st.container():
         _display_sm_links()
     with st.container():
         _display_pages_links()
+    main_logo_gif = str(Path(logo_dir, 'tso_logo_main.gif'))
+    col1, col2, col3 = st.columns([1.5, 5, 1.5])
+    col2.markdown(_return_gif_html(main_logo_gif),
+               unsafe_allow_html=True,
+               )
 
 
 if __name__ == '__main__':
